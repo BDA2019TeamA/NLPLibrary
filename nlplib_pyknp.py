@@ -46,8 +46,9 @@ if __name__ == '__main__':
         print (m.midasi, m.yomi, m.genkei, m.hinsi, m.bunrui, m.katuyou1, m.katuyou2, m.imis, m.repname)
 
     #knp = KNP(option = "-tab -anaphora)
-    knp = KNP(jumanpp=True)
-    result = knp.parse("すもももももももものうち")
+    knp = KNP(option = '-tab -anaphora', jumanpp=True)
+    #result = knp.parse("すもももももももものうち")
+    result = knp.parse("太郎は太っている。彼はいつも何か食べている。")
 
     for bnst in result.bnst_list():
         print(bnst.midasi)
