@@ -35,10 +35,13 @@ class Chunk():
         self.fstring = bnst.fstring
 
 
-def pyknp_make_commentlist(text, kparser):
-    text = re.split('[\n\t。 ]', text) #改行または句点で区切り配列化
-    while '' in text:         #空行は削除
-        text.remove('')
+def pyknp_make_commentlist(text, kparser, lines_split=True):
+    if lines_split:
+        text = re.split('[\n\t。 ]', text) #改行または句点で区切り配列化
+        while '' in text:         #空行は削除
+            text.remove('')
+    else:
+        text = [text]
     
     comment_list=[] #
     for index, sentence in enumerate(text):
@@ -80,19 +83,73 @@ def pyknp_morph2df(comment_list):
                     mrph.katsuyou2,     #活用2
                     mrph.imis,          #意味情報
                     mrph.repname        #代表表記
-
                 ], index=df.columns)
                 df = df.append(series, ignore_index = True)
+    return df
+
+def fst_parsing_NormReprNotation(fstring):
+    pattern = r"<正規化代表表記:(.+?)>"
+    repatter = re.compile(pattern)
+    res = repatter.findall(fstring)
+    if len(res)>0:
+        nrn = res[0]
+    else:
+        nrn = 0
+    pfst = re.sub(pattern, "", fstring)
+    return nrn, pfst
+
+def fst_parsing_MainReprNotation(fstring):
+    pattern = r"<主辞.?代表表記:(.+?)>"
+    repatter = re.compile(pattern)
+    res = repatter.findall(fstring)
+    if len(res)>0:
+        mrn = res[0]
+    else:
+        mrn = 0
+    pfst = re.sub(pattern, "", fstring)
+    return mrn, pfst
+
+def fst_parsing_particleCase(fstring):
+    pattern = r"<係:(.+?)>"
+    repatter = re.compile(pattern)
+    res = repatter.findall(fstring)
+    if len(res)>0:
+        pc = res[0]
+    else:
+        pc = 0
+    pfst = re.sub(pattern, "", fstring)
+    return pc, pfst
+
+def pyknp_chunkinfo(comment_list):
+    df = pd.DataFrame(index=[], columns=['文番号','文節番号','見出し','掛先','正規化代表表記','主辞代表表記','助詞の格','素性'])
+    for sindex, sentence_list in enumerate(comment_list):
+        for cid, chunk in enumerate(sentence_list):
+            nrn, fstring = fst_parsing_NormReprNotation(chunk.fstring)
+            mrn, fstring = fst_parsing_MainReprNotation(fstring)
+            pc, fstring = fst_parsing_particleCase(fstring)
+
+            print(sindex, cid, chunk.midasi, fstring)
+            series = pd.Series([
+                sindex,          # 文番号
+                cid,             # 文節番号
+                chunk.midasi,    # 見出し
+                chunk.dst,       # 係り受け先文節番号
+                nrn,             # 正規化代表表記
+                mrn,             # 主辞代表表記
+                pc,              # 助詞の格
+                fstring          # 残りの素性
+            ], index=df.columns)
+            df = df.append(series, ignore_index = True)
     return df
 
 
 def pyknp_dependency_visualize(comment_list, withstr=False):
     for sentence_list in comment_list:
         graph = []
-        for chunk in sentence_list:
+        for cid,chunk in enumerate(sentence_list):
             if chunk.dst != -1:
-                src_str = chunk.midasi
-                dst_str = sentence_list[chunk.dst].midasi
+                src_str = str(cid)+":"+chunk.midasi
+                dst_str = str(chunk.dst)+":"+sentence_list[chunk.dst].midasi
                 graph.append((src_str, dst_str))
                 if withstr:
                     print("{}  =>  {}".format(src_str,dst_str))
