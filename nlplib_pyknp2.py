@@ -123,7 +123,38 @@ def fst_parsing_particleCase(fstring):
     pfst = re.sub(pattern, "", fstring)
     return pc, pfst
 
-Chunk_series_columns = ['文番号','文節番号','ID','見出し','掛先ID', '係り受けタイプ','正規化代表表記','主辞代表表記','助詞の格','素性']
+def fst_parsing_taigen_yogen(fstring):
+    tpat = r"<体言>"
+    trepat = re.compile(tpat)
+    tres = trepat.findall(fstring)
+    if len(tres)>0:
+        taigen = 1
+    else:
+        taigen = 0
+    fstring = re.sub(trepat, "", fstring)
+
+    ypat = r"<用言:(.)>"
+    yrepat = re.compile(ypat)
+    yres = yrepat.findall(fstring)
+    if len(yres)>0:
+        yogen = yres[0]
+    else:
+        yogen = ""
+    fstring = re.sub(yrepat, "", fstring)
+    return taigen, yogen, fstring
+
+def fst_parsing_adverb(fstring):
+    pattern = r"<副詞>"
+    repatter = re.compile(pattern)
+    res = repatter.findall(fstring)
+    if len(res)>0:
+        adverb = 1
+    else:
+        adverb = 0
+    fstring = re.sub(pattern, "", fstring)
+    return adverb, fstring
+
+Chunk_series_columns = ['文番号','文節番号','ID','見出し','掛先ID', '係り受けタイプ','正規化代表表記','主辞代表表記','助詞の格', '体言','用言','副詞','素性']
 
 class Chunk:
     def __init__(self, sid, cid, bnst):
@@ -139,9 +170,14 @@ class Chunk:
         nrn, fstring = fst_parsing_NormReprNotation(bnst.fstring)
         mrn, fstring = fst_parsing_MainReprNotation(fstring)
         pc, fstring = fst_parsing_particleCase(fstring)
+        taigen, yogen, fstring = fst_parsing_taigen_yogen(fstring)
+        adverb, fstring = fst_parsing_adverb(fstring)
         self.nrn = nrn
         self.mrn = mrn
         self.pc = pc
+        self.taigen = taigen
+        self.yogen = yogen
+        self.adverb = adverb
         self.fstring = fstring
 
     def make_chunk_series_list(self):
@@ -155,6 +191,9 @@ class Chunk:
             self.nrn,             # 正規化代表表記
             self.mrn,             # 主辞代表表記
             self.pc,              # 助詞の格
+            self.taigen,          # 体言
+            self.yogen,           # 用言
+            self.adverb,          # 副詞
             self.fstring          # 残りの素性
         ]
     
@@ -243,6 +282,29 @@ def pyknp_dependency_visualize(comment_list, withstr=False):
         #g.write_png("result.png")
         display_png(Image(g.create_png()))
 
+
+def pyknp_search_1(comment_list):
+    def chunk_isNextSentence(chunk):
+        if chunk.midasi[-1]=="。":
+            return True
+        else:
+            return False
+    
+    def chunk_isParent(chunk):
+        if chunk.yogen=="形":
+            return True
+        else:
+            return False
+    
+    def chunk_isChild(chunk):
+        if 1==1:
+            return True
+        else:
+            return False
+
+    for sid, sentence_list in enumerate(comment_list):
+        next_sentence = -1
+        stack = []
 
 
 if __name__ == '__main__':
