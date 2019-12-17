@@ -233,34 +233,37 @@ def pyknp_make_commentlist(text, kparser, lines_split=True):
     return comment_list
 
 
-def pyknp_morph2df(comment_list):
+def pyknp_morph2df(comment_list, output=False):
     df = pd.DataFrame(index=[], columns = Morph_series_columns)
     for sindex,sentence_list in enumerate(comment_list): 
         for cid, chunk in enumerate(sentence_list):
             for mid, mrph in enumerate(chunk.morphs):
-                #print("[%d %d %s]%s###%s###"%(cid,mid,mrph.midasi, mrph.imis, mrph.repname))
+                if output:
+                    print("[%d %d %s]%s###%s###"%(cid,mid,mrph.midasi, mrph.imis, mrph.repname))
                 # make series
                 series = pd.Series(mrph.make_morph_series_list(), index=df.columns)
                 df = df.append(series, ignore_index = True)
     return df
 
 
-def pyknp_chunk2df(comment_list):
+def pyknp_chunk2df(comment_list, output=False):
     df = pd.DataFrame(index=[], columns = Chunk_series_columns)
     for sindex, sentence_list in enumerate(comment_list):
         for cid, chunk in enumerate(sentence_list):
-            #print(sindex, cid, chunk.midasi, fstring)
+            if output:
+                print(sindex, cid, chunk.midasi, fstring)
             # make series
             series = pd.Series(chunk.make_chunk_series_list(), index = df.columns)
             df = df.append(series, ignore_index = True)
     return df
 
-def pyknp_tag2df(comment_list):
+def pyknp_tag2df(comment_list, output=False):
     df = pd.DataFrame(index=[], columns = Tag_series_columns)
     for sindex,sentence_list in enumerate(comment_list): 
         for cid, chunk in enumerate(sentence_list):
             for tid, tag in enumerate(chunk.tags):
-                #print("[%d %d %s]###%s###"%(cid,tid,tag.midasi, tag.fstring))
+                if output:
+                    print("[%d %d %s]###%s###"%(cid,tid,tag.midasi, tag.fstring))
                 # make series
                 series = pd.Series(tag.make_tag_series_list(), index=df.columns)
                 df = df.append(series, ignore_index = True)
@@ -317,3 +320,9 @@ if __name__ == '__main__':
 
     comment_list = pyknp_make_commentlist(text, knp)
     pyknp_dependency_visualize(comment_list, withstr=True)
+
+    pyknp_morph2df(comment_list, output=True)
+
+    pyknp_tag2df(comment_list, output=True)
+
+    pyknp_chunk2df(comment_list, output=True)
