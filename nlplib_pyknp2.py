@@ -65,6 +65,16 @@ def fst_parsing_caseAnalysisResult(fstring):
     car, fstring = fst_parsing_skel(fstring, pattern, "")
     return car, fstring
 
+def fst_parsing_head_tail(fstring):
+    hpat = r"<文頭>"
+    head, fstring = fst_parsing_skel(fstring, hpat, "")
+    head = 1 if head=="<文頭>" else 0
+
+    tpat = r"<文末>"
+    tail, fstring = fst_parsing_skel(fstring, tpat, "")
+    tail = 1 if tail=="<文末>" else 0
+    return head, tail, fstring
+
 ##### Morph
 
 def imis_parsing_repname(string):
@@ -187,12 +197,15 @@ class Chunk:
         pc, fstring = fst_parsing_particleCase(fstring)
         taigen, yogen, fstring = fst_parsing_taigen_yogen(fstring)
         adverb, fstring = fst_parsing_adverb(fstring)
+        head, tail, fstring = fst_parsing_head_tail(fstring)
         self.nrn = nrn
         self.mrn = mrn
         self.pc = pc
         self.taigen = taigen
         self.yogen = yogen
         self.adverb = adverb
+        self.isHead = head
+        self.isTail = tail
         self.fstring = fstring
 
     def make_chunk_series_list(self):
@@ -257,8 +270,8 @@ def pyknp_morph2df(comment_list, output=False):
             for mid, mrph in enumerate(chunk.morphs):
                 if output:
                     #print("[%d %d %s]%s###%s###"%(cid,mid,mrph.midasi, mrph.imis, mrph.repname))
-                    #print(mrph.make_morph_series_list())
-                    print(mrph.make_morph_series_list()[-2])
+                    print(mrph.make_morph_series_list())
+                    #print(mrph.make_morph_series_list()[-2])
                 # make series
                 series = pd.Series(mrph.make_morph_series_list(), index=df.columns)
                 df = df.append(series, ignore_index = True)
@@ -272,8 +285,8 @@ def pyknp_chunk2df(comment_list, output=False):
     for sindex, sentence_list in enumerate(comment_list):
         for cid, chunk in enumerate(sentence_list):
             if output:
-                #print(chunk.make_chunk_series_list())
-                print(chunk.make_chunk_series_list()[-1])
+                print(chunk.make_chunk_series_list())
+                #print(chunk.make_chunk_series_list()[-1])
             # make series
             series = pd.Series(chunk.make_chunk_series_list(), index = df.columns)
             df = df.append(series, ignore_index = True)
@@ -288,8 +301,9 @@ def pyknp_tag2df(comment_list, output=False):
             for tid, tag in enumerate(chunk.tags):
                 if output:
                     #print("[%d %d %s]###%s###"%(cid,tid,tag.midasi, tag.fstring))
-                    #print(tag.make_tag_series_list())
-                    print(tag.make_tag_series_list()[-1])
+                    print(tag.make_tag_series_list())
+                    #print(tag.car)
+                    #print(tag.fstring)
                 # make series
                 series = pd.Series(tag.make_tag_series_list(), index=df.columns)
                 df = df.append(series, ignore_index = True)
@@ -312,28 +326,33 @@ def pyknp_dependency_visualize(comment_list, withstr=False):
         display_png(Image(g.create_png()))
 
 
-def pyknp_search_1(comment_list):
-    def chunk_isNextSentence(chunk):
-        if chunk.midasi[-1]=="。":
-            return True
-        else:
-            return False
-    
+def pyknp_search_AdjectiveNoun(comment_list): #形容詞連体修飾-名詞(美味しいご飯)
     def chunk_isParent(chunk):
-        if chunk.yogen=="形":
+        if chunk.yogen=="形" and chunk.pc=="連格":
             return True
         else:
             return False
     
     def chunk_isChild(chunk):
-        if 1==1:
+        if chunk.taigen==1:
             return True
         else:
             return False
 
+    pair = []
     for sid, sentence_list in enumerate(comment_list):
-        next_sentence = -1
-        stack = []
+        for cid, chunk in enumerate(sentence_list):
+            if chunk_isParent(chunk):
+                id = chunk.cid
+                if chunk.dst==-1 or chunk.isHead:
+                    continue
+                dst_chunk = sentence_list[chunk.dst]
+                if chunk_isChild(dst_chunk):
+                    pair.append((chunk.midasi, dst_chunk.midasi))
+    return pair
+
+def pyknp_search_NounAdjective(comment_list): #名詞-形容詞連用(ご飯は美味しい)
+    return True
 
 
 if __name__ == '__main__':
