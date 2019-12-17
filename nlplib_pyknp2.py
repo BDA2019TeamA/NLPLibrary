@@ -9,87 +9,7 @@ import logging
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
-##### Morph
-
-def imis_parsing_repname(string):
-    sl = string.split(" ")
-    place = -1
-    for i, info in enumerate(sl):
-        if info[:5]=="代表表記:":
-            place = i
-    sl.pop(place)
-    return " ".join(sl)
-
-Morph_series_columns = ['文番号','文節番号', '形態素番号', 'ID','表層','読み','原形','品詞','品詞細分類','活用1','活用2', '意味情報', '代表表記', '代表表記(ひらがな))']
-
-class Morph:
-    def __init__(self, sid, cid, mid, mrph):
-        self.sid = sid # sentence_id
-        self.cid = cid # chunk_id
-        self.mid = mid # morph_id
-        self.id = mrph.mrph_id
-        self.midasi = mrph.midasi
-        self.yomi = mrph.yomi
-        self.genkei = mrph.genkei
-        self.hinsi = mrph.hinsi
-        self.bunrui = mrph.bunrui
-        self.katsuyou1 = mrph.katuyou1
-        self.katsuyou2 = mrph.katuyou2
-        self.imis = imis_parsing_repname(mrph.imis)
-        if mrph.repname=="":
-            self.repname = ""
-            self.repname_kana = ""
-        else:
-            self.repname = mrph.repname.split("/")[0]
-            self.repname_kana = mrph.repname.split("/")[1]
-
-    def make_morph_series_list(self):
-        return [
-            self.sid,            #文番号
-            self.cid,            #文節番号
-            self.mid,            #形態素番号
-            self.id,
-            self.midasi,         #表層
-            self.yomi,           #読み
-            self.genkei,         #原形     
-            self.hinsi,          #品詞
-            self.bunrui,         #品詞細分類
-            self.katsuyou1,      #活用1
-            self.katsuyou2,      #活用2
-            self.imis,           #意味情報
-            self.repname,        #代表表記
-            self.repname_kana    #代表表記(ひらがな)
-        ]
-
-##### Tag
-
-Tag_series_columns = ['文番号', '文節番号', '基本句番号', 'ID', '表層', '掛先ID', '係り受けタイプ', '素性']
-
-class Tag:
-    def __init__(self, sid, cid, tid, tag):
-        self.sid = sid
-        self.cid = cid
-        self.tid = tid
-        self.id = tag.tag_id
-        self.midasi = "".join(mrph.midasi for mrph in tag.mrph_list())
-        self.dst = tag.parent_id
-        self.dpndtype = tag.dpndtype
-        self.fstring = tag.fstring
-
-    def make_tag_series_list(self):
-        return [
-            self.sid,
-            self.cid,
-            self.tid,
-            self.id,
-            self.midasi,
-            self.dst,
-            self.dpndtype,
-            self.fstring
-        ]
-
-##### Chunk
-
+##### get elements from "素性"
 def fst_parsing_NormReprNotation(fstring):
     pattern = r"<正規化代表表記:(.+?)>"
     repatter = re.compile(pattern)
@@ -154,7 +74,113 @@ def fst_parsing_adverb(fstring):
     fstring = re.sub(pattern, "", fstring)
     return adverb, fstring
 
-Chunk_series_columns = ['文番号','文節番号','ID','見出し','掛先ID', '係り受けタイプ','正規化代表表記','主辞代表表記','助詞の格', '体言','用言','副詞','素性']
+def fst_parsing_eid(fstring):
+    pattern = r"<EID:([0-9]+?)>"
+    repatter = re.compile(pattern)
+    res = repatter.findall(fstring)
+    if len(res)>0:
+        eid = int(res[0])
+    else:
+        eid = -1
+    fstring = re.sub(pattern, "", fstring)
+    return eid, fstring
+
+##### Morph
+
+def imis_parsing_repname(string):
+    sl = string.split(" ")
+    place = -1
+    for i, info in enumerate(sl):
+        if info[:5]=="代表表記:":
+            place = i
+    sl.pop(place)
+    return " ".join(sl)
+
+Morph_series_columns = ['文番号','文節番号', '形態素番号', 'ID','表層','読み','原形','品詞','品詞細分類','活用1','活用2', '意味情報', '代表表記', '代表表記(ひらがな))']
+
+class Morph:
+    def __init__(self, sid, cid, mid, mrph):
+        self.sid = sid # sentence_id
+        self.cid = cid # chunk_id
+        self.mid = mid # morph_id
+        self.id = mrph.mrph_id
+        self.midasi = mrph.midasi
+        self.yomi = mrph.yomi
+        self.genkei = mrph.genkei
+        self.hinsi = mrph.hinsi
+        self.bunrui = mrph.bunrui
+        self.katsuyou1 = mrph.katuyou1
+        self.katsuyou2 = mrph.katuyou2
+        self.imis = imis_parsing_repname(mrph.imis)
+        if mrph.repname=="":
+            self.repname = ""
+            self.repname_kana = ""
+        else:
+            self.repname = mrph.repname.split("/")[0]
+            self.repname_kana = mrph.repname.split("/")[1]
+
+    def make_morph_series_list(self):
+        return [
+            self.sid,            #文番号
+            self.cid,            #文節番号
+            self.mid,            #形態素番号
+            self.id,
+            self.midasi,         #表層
+            self.yomi,           #読み
+            self.genkei,         #原形     
+            self.hinsi,          #品詞
+            self.bunrui,         #品詞細分類
+            self.katsuyou1,      #活用1
+            self.katsuyou2,      #活用2
+            self.imis,           #意味情報
+            self.repname,        #代表表記
+            self.repname_kana    #代表表記(ひらがな)
+        ]
+
+
+##### Tag
+Tag_series_columns = ['文番号', '文節番号', '基本句番号', 'ID', '表層', '掛先ID', '係り受けタイプ','EID','係:','体言','用言','副詞', '素性']
+
+class Tag:
+    def __init__(self, sid, cid, tid, tag):
+        self.sid = sid
+        self.cid = cid
+        self.tid = tid
+        self.id = tag.tag_id
+        self.midasi = "".join(mrph.midasi for mrph in tag.mrph_list())
+        self.dst = tag.parent_id
+        self.dpndtype = tag.dpndtype
+        eid, fstring = fst_parsing_eid(tag.fstring)
+        taigen, yogen, fstring = fst_parsing_taigen_yogen(fstring)
+        adverb, fstring = fst_parsing_adverb(fstring)
+        pc, fstring = fst_parsing_particleCase(fstring)
+        self.eid = eid
+        self.pc = pc
+        self.taigen = taigen
+        self.yogen = yogen
+        self.adverb = adverb
+        self.fstring = fstring
+
+    def make_tag_series_list(self):
+        return [
+            self.sid,
+            self.cid,
+            self.tid,
+            self.id,
+            self.midasi,
+            self.dst,
+            self.dpndtype,
+            self.eid,
+            self.pc,
+            self.taigen,
+            self.yogen,
+            self.adverb,
+            self.fstring
+        ]
+
+
+##### Chunk
+Chunk_series_columns = ['文番号','文節番号','ID','見出し','掛先ID', '係り受けタイプ','正規化代表表記','主辞代表表記','係:', '体言','用言','副詞','素性']
 
 class Chunk:
     def __init__(self, sid, cid, bnst):
@@ -235,11 +261,14 @@ def pyknp_make_commentlist(text, kparser, lines_split=True):
 
 def pyknp_morph2df(comment_list, output=False):
     df = pd.DataFrame(index=[], columns = Morph_series_columns)
+    if output:
+        print("/".join(Morph_series_columns))
     for sindex,sentence_list in enumerate(comment_list): 
         for cid, chunk in enumerate(sentence_list):
             for mid, mrph in enumerate(chunk.morphs):
                 if output:
-                    print("[%d %d %s]%s###%s###"%(cid,mid,mrph.midasi, mrph.imis, mrph.repname))
+                    #print("[%d %d %s]%s###%s###"%(cid,mid,mrph.midasi, mrph.imis, mrph.repname))
+                    print(mrph.make_morph_series_list())
                 # make series
                 series = pd.Series(mrph.make_morph_series_list(), index=df.columns)
                 df = df.append(series, ignore_index = True)
@@ -248,10 +277,12 @@ def pyknp_morph2df(comment_list, output=False):
 
 def pyknp_chunk2df(comment_list, output=False):
     df = pd.DataFrame(index=[], columns = Chunk_series_columns)
+    if output:
+        print("/".join(Chunk_series_columns))
     for sindex, sentence_list in enumerate(comment_list):
         for cid, chunk in enumerate(sentence_list):
             if output:
-                print(sindex, cid, chunk.midasi, fstring)
+                print(chunk.make_chunk_series_list())
             # make series
             series = pd.Series(chunk.make_chunk_series_list(), index = df.columns)
             df = df.append(series, ignore_index = True)
@@ -259,11 +290,14 @@ def pyknp_chunk2df(comment_list, output=False):
 
 def pyknp_tag2df(comment_list, output=False):
     df = pd.DataFrame(index=[], columns = Tag_series_columns)
+    if output:
+        print("/".join(Tag_series_columns))
     for sindex,sentence_list in enumerate(comment_list): 
         for cid, chunk in enumerate(sentence_list):
             for tid, tag in enumerate(chunk.tags):
                 if output:
-                    print("[%d %d %s]###%s###"%(cid,tid,tag.midasi, tag.fstring))
+                    #print("[%d %d %s]###%s###"%(cid,tid,tag.midasi, tag.fstring))
+                    print(tag.make_tag_series_list())
                 # make series
                 series = pd.Series(tag.make_tag_series_list(), index=df.columns)
                 df = df.append(series, ignore_index = True)
