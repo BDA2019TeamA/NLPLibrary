@@ -10,80 +10,60 @@ logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
 ##### get elements from "素性"
-def fst_parsing_NormReprNotation(fstring):
-    pattern = r"<正規化代表表記:(.+?)>"
+def fst_parsing_skel(fstring, pattern, none):
     repatter = re.compile(pattern)
     res = repatter.findall(fstring)
     if len(res)>0:
-        nrn = res[0]
+        result = res[0]
     else:
-        nrn = 0
+        result = none
     pfst = re.sub(pattern, "", fstring)
-    return nrn, pfst
+    return result, pfst
+
+def fst_parsing_NormReprNotation(fstring):
+    pattern = r"<正規化代表表記:(.+?)>"
+    nrn, fstring = fst_parsing_skel(fstring, pattern, "")
+    return nrn, fstring
+
+def fst_parsing_YogenReprNotation(fstring):
+    pattern = r"<用言代表表記:(.+?)>"
+    yrn, fstring = fst_parsing_skel(fstring, pattern, "")
+    return yrn, fstring
 
 def fst_parsing_MainReprNotation(fstring):
     pattern = r"<主辞.?代表表記:(.+?)>"
-    repatter = re.compile(pattern)
-    res = repatter.findall(fstring)
-    if len(res)>0:
-        mrn = res[0]
-    else:
-        mrn = 0
-    pfst = re.sub(pattern, "", fstring)
-    return mrn, pfst
+    mrn, fstring = fst_parsing_skel(fstring, pattern, "")
+    return mrn, fstring
 
 def fst_parsing_particleCase(fstring):
     pattern = r"<係:(.+?)>"
-    repatter = re.compile(pattern)
-    res = repatter.findall(fstring)
-    if len(res)>0:
-        pc = res[0]
-    else:
-        pc = 0
-    pfst = re.sub(pattern, "", fstring)
-    return pc, pfst
+    pc, fstring = fst_parsing_skel(fstring, pattern, "")
+    return pc, fstring
 
 def fst_parsing_taigen_yogen(fstring):
     tpat = r"<体言>"
-    trepat = re.compile(tpat)
-    tres = trepat.findall(fstring)
-    if len(tres)>0:
-        taigen = 1
-    else:
-        taigen = 0
-    fstring = re.sub(trepat, "", fstring)
+    taigen, fstring = fst_parsing_skel(fstring, tpat, "")
+    taigen = 1 if taigen=="<体言>" else 0
 
     ypat = r"<用言:(.)>"
-    yrepat = re.compile(ypat)
-    yres = yrepat.findall(fstring)
-    if len(yres)>0:
-        yogen = yres[0]
-    else:
-        yogen = ""
-    fstring = re.sub(yrepat, "", fstring)
+    yogen, fstring = fst_parsing_skel(fstring, ypat, "")
     return taigen, yogen, fstring
 
 def fst_parsing_adverb(fstring):
     pattern = r"<副詞>"
-    repatter = re.compile(pattern)
-    res = repatter.findall(fstring)
-    if len(res)>0:
-        adverb = 1
-    else:
-        adverb = 0
-    fstring = re.sub(pattern, "", fstring)
+    adverb, fstring = fst_parsing_skel(fstring, pattern, "")
+    adverb = 1 if adverb=="<副詞>" else 0
     return adverb, fstring
 
 def fst_parsing_eid(fstring):
     pattern = r"<EID:([0-9]+?)>"
-    repatter = re.compile(pattern)
-    res = repatter.findall(fstring)
-    if len(res)>0:
-        eid = int(res[0])
-    else:
-        eid = -1
-    fstring = re.sub(pattern, "", fstring)
-    return eid, fstring
+    eid, fstring = fst_parsing_skel(fstring, pattern, "-1")
+    return int(eid), fstring
+
+def fst_parsing_caseAnalysisResult(fstring):
+    pattern = r"<格解析結果:(.+?)>"
+    car, fstring = fst_parsing_skel(fstring, pattern, "")
+    return car, fstring
 
 ##### Morph
 
@@ -139,7 +119,7 @@ class Morph:
 
 
 ##### Tag
-Tag_series_columns = ['文番号', '文節番号', '基本句番号', 'ID', '表層', '掛先ID', '係り受けタイプ','EID','係:','体言','用言','副詞', '素性']
+Tag_series_columns = ['文番号', '文節番号', '基本句番号', 'ID', '表層','正規化代表表記','用言代表表記', '掛先ID', '係り受けタイプ','EID','係:','体言','用言','副詞','格解析結果', '素性']
 
 class Tag:
     def __init__(self, sid, cid, tid, tag):
@@ -154,11 +134,17 @@ class Tag:
         taigen, yogen, fstring = fst_parsing_taigen_yogen(fstring)
         adverb, fstring = fst_parsing_adverb(fstring)
         pc, fstring = fst_parsing_particleCase(fstring)
+        car, fstring = fst_parsing_caseAnalysisResult(fstring)
+        nrn, fstring = fst_parsing_NormReprNotation(fstring)
+        yrn, fstring = fst_parsing_YogenReprNotation(fstring)
         self.eid = eid
         self.pc = pc
         self.taigen = taigen
         self.yogen = yogen
         self.adverb = adverb
+        self.car = car
+        self.nrn = nrn
+        self.yrn = yrn
         self.fstring = fstring
 
     def make_tag_series_list(self):
@@ -168,6 +154,8 @@ class Tag:
             self.tid,
             self.id,
             self.midasi,
+            self.nrn,
+            self.yrn,
             self.dst,
             self.dpndtype,
             self.eid,
@@ -175,6 +163,7 @@ class Tag:
             self.taigen,
             self.yogen,
             self.adverb,
+            self.car,
             self.fstring
         ]
 
@@ -268,7 +257,8 @@ def pyknp_morph2df(comment_list, output=False):
             for mid, mrph in enumerate(chunk.morphs):
                 if output:
                     #print("[%d %d %s]%s###%s###"%(cid,mid,mrph.midasi, mrph.imis, mrph.repname))
-                    print(mrph.make_morph_series_list())
+                    #print(mrph.make_morph_series_list())
+                    print(mrph.make_morph_series_list()[-2])
                 # make series
                 series = pd.Series(mrph.make_morph_series_list(), index=df.columns)
                 df = df.append(series, ignore_index = True)
@@ -282,7 +272,8 @@ def pyknp_chunk2df(comment_list, output=False):
     for sindex, sentence_list in enumerate(comment_list):
         for cid, chunk in enumerate(sentence_list):
             if output:
-                print(chunk.make_chunk_series_list())
+                #print(chunk.make_chunk_series_list())
+                print(chunk.make_chunk_series_list()[-1])
             # make series
             series = pd.Series(chunk.make_chunk_series_list(), index = df.columns)
             df = df.append(series, ignore_index = True)
@@ -297,7 +288,8 @@ def pyknp_tag2df(comment_list, output=False):
             for tid, tag in enumerate(chunk.tags):
                 if output:
                     #print("[%d %d %s]###%s###"%(cid,tid,tag.midasi, tag.fstring))
-                    print(tag.make_tag_series_list())
+                    #print(tag.make_tag_series_list())
+                    print(tag.make_tag_series_list()[-1])
                 # make series
                 series = pd.Series(tag.make_tag_series_list(), index=df.columns)
                 df = df.append(series, ignore_index = True)
