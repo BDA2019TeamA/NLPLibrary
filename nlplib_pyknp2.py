@@ -75,6 +75,11 @@ def fst_parsing_head_tail(fstring):
     tail = 1 if tail=="<文末>" else 0
     return head, tail, fstring
 
+def fst_parsing_EstimatedCase(fstring):
+    pattern = r"<解析格:(.+?)>"
+    ecase, fstring = fst_parsing_skel(fstring, pattern, "")
+    return ecase, fstring
+
 ##### Morph
 
 def imis_parsing_repname(string):
@@ -129,7 +134,7 @@ class Morph:
 
 
 ##### Tag
-Tag_series_columns = ['文番号', '文節番号', '基本句番号', 'ID', '表層','正規化代表表記','用言代表表記', '掛先ID', '係り受けタイプ','EID','係:','体言','用言','副詞','格解析結果', '素性']
+Tag_series_columns = ['文番号', '文節番号', '基本句番号', 'ID', '表層','正規化代表表記','用言代表表記', '掛先ID', '係り受けタイプ','EID','係:','解析格','体言','用言','副詞','格解析結果', '素性']
 
 class Tag:
     def __init__(self, sid, cid, tid, tag):
@@ -147,15 +152,17 @@ class Tag:
         car, fstring = fst_parsing_caseAnalysisResult(fstring)
         nrn, fstring = fst_parsing_NormReprNotation(fstring)
         yrn, fstring = fst_parsing_YogenReprNotation(fstring)
-        self.eid = eid
-        self.pc = pc
-        self.taigen = taigen
-        self.yogen = yogen
-        self.adverb = adverb
-        self.car = car
-        self.nrn = nrn
-        self.yrn = yrn
-        self.fstring = fstring
+        ecase, fstring = fst_parsing_EstimatedCase(fstring)
+        self.eid = eid          # EID
+        self.pc = pc            # <係:>
+        self.taigen = taigen    # 体言
+        self.yogen = yogen      # 用言
+        self.adverb = adverb    # 副詞
+        self.car = car          # 格解析結果
+        self.nrn = nrn          # 正規化代表表記
+        self.yrn = yrn          # 用言代表表記
+        self.ecase = ecase      # <解析格:>
+        self.fstring = fstring  # その他の素性
 
     def make_tag_series_list(self):
         return [
@@ -170,6 +177,7 @@ class Tag:
             self.dpndtype,
             self.eid,
             self.pc,
+            self.ecase,
             self.taigen,
             self.yogen,
             self.adverb,
@@ -179,7 +187,7 @@ class Tag:
 
 
 ##### Chunk
-Chunk_series_columns = ['文番号','文節番号','ID','見出し','掛先ID', '係り受けタイプ','正規化代表表記','主辞代表表記','係:', '体言','用言','副詞','素性']
+Chunk_series_columns = ['文番号','文節番号','ID','src','見出し','掛先ID', '係り受けタイプ','正規化代表表記','主辞代表表記','係:', '体言','用言','副詞','素性']
 
 class Chunk:
     def __init__(self, sid, cid, bnst):
@@ -213,6 +221,7 @@ class Chunk:
             self.sid,             # 文番号
             self.cid,             # 文節番号
             self.id,
+            self.srcs,
             self.midasi,          # 見出し
             self.dst,             # 係り受け先文節番号
             self.dpndtype,        # 係り受けタイプ
@@ -327,7 +336,7 @@ def pyknp_dependency_visualize(comment_list, withstr=False):
 
 
 def pyknp_search_AdjectiveNoun(comment_list): #形容詞連体修飾-名詞(美味しいご飯)
-    def chunk_isParent(chunk):
+    def chunk_isRoot(chunk):
         if chunk.yogen=="形" and chunk.pc=="連格":
             return True
         else:
@@ -339,20 +348,66 @@ def pyknp_search_AdjectiveNoun(comment_list): #形容詞連体修飾-名詞(美�
         else:
             return False
 
-    pair = []
+    pair_chunks = []
     for sid, sentence_list in enumerate(comment_list):
         for cid, chunk in enumerate(sentence_list):
-            if chunk_isParent(chunk):
+            if chunk_isRoot(chunk):
                 id = chunk.cid
-                if chunk.dst==-1 or chunk.isHead:
+                if chunk.dst==-1 or chunk.isTail:
                     continue
                 dst_chunk = sentence_list[chunk.dst]
                 if chunk_isChild(dst_chunk):
-                    pair.append((chunk.midasi, dst_chunk.midasi))
-    return pair
+                    pair_chunks.append([chunk, dst_chunk])
+    
+    search_result = [[i[0].midasi, i[1].midasi] for i in pair_chunks]
+
+    return search_result
 
 def pyknp_search_NounAdjective(comment_list): #名詞-形容詞連用(ご飯は美味しい)
-    return True
+    def chunk_isRoot(chunk):
+        if chunk.yogen=="形" and chunk.pc=="連用":
+            return True
+        else:
+            return False
+    
+    def chunk_isChild(chunk):
+        if chunk.taigen==1:
+            for tag in chunk.tags:
+                if tag.ecase=="ガ":
+                    return True
+        return False
+
+    pair_chunks = []
+    for sid, sentence_list in enumerate(comment_list):
+        for cid, chunk in enumerate(sentence_list):
+            if chunk_isRoot(chunk):
+                stack = []
+                stack.extend(chunk.srcs)
+                while len(stack)>0:
+                    next_id = stack.pop()
+                    next_chunk = sentence_list[next_id]
+                    if chunk_isChild(next_chunk):
+                        pair_chunks.append([next_chunk, chunk])
+                    stack.extend(next_chunk.srcs)
+
+    for i, pair in enumerate(pair_chunks):
+        sentence_id = pair[0].sid
+        adverbs = []
+        for id in pair[1].srcs:
+            if comment_list[sentence_id][id].adverb==1:
+                adverbs.append(comment_list[sentence_id][id])
+        
+        nokakus = []
+        for id in pair[0].srcs:
+            if comment_list[sentence_id][id].pc=="ノ格":
+                nokakus.append(comment_list[sentence_id][id])
+
+        pair_chunks[i].append(adverbs)
+        pair_chunks[i].append(nokakus)
+
+    search_result = [[cl[0].midasi, cl[1].midasi, "adverb:["+"/".join([c.midasi for c in cl[2]])+"]", "nokaku:["+"/".join([c.midasi for c in cl[3]])+"]"] for cl in pair_chunks]
+
+    return search_result
 
 
 if __name__ == '__main__':
