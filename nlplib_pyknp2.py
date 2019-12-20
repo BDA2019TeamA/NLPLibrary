@@ -80,6 +80,15 @@ def fst_parsing_EstimatedCase(fstring):
     ecase, fstring = fst_parsing_skel(fstring, pattern, "")
     return ecase, fstring
 
+def fst_parsing_rentai_renyo(fstring):
+    tpat = r"<連体修飾>"
+    rentai, fstring = fst_parsing_skel(fstring, tpat, "")
+    rentai = 1 if rentai=="<連体修飾>" else 0
+    ypat = r"<連用要素>"
+    renyo, fstring = fst_parsing_skel(fstring, ypat, "")
+    renyo = 1 if renyo=="<連用要素>" else 0
+    return rentai, renyo, fstring
+
 ##### Morph
 
 def imis_parsing_repname(string):
@@ -187,7 +196,7 @@ class Tag:
 
 
 ##### Chunk
-Chunk_series_columns = ['文番号','文節番号','ID','src','見出し','掛先ID', '係り受けタイプ','正規化代表表記','主辞代表表記','係:', '体言','用言','副詞','素性']
+Chunk_series_columns = ['文番号','文節番号','ID','src','見出し','掛先ID', '係り受けタイプ','正規化代表表記','主辞代表表記','係:','連体修飾','連用要素', '体言','用言','副詞','素性']
 
 class Chunk:
     def __init__(self, sid, cid, bnst):
@@ -206,9 +215,12 @@ class Chunk:
         taigen, yogen, fstring = fst_parsing_taigen_yogen(fstring)
         adverb, fstring = fst_parsing_adverb(fstring)
         head, tail, fstring = fst_parsing_head_tail(fstring)
+        rentai, renyo, fstring = fst_parsing_rentai_renyo(fstring)
         self.nrn = nrn
         self.mrn = mrn
         self.pc = pc
+        self.rentai = rentai   # <連体修飾>
+        self.renyo = renyo     # <連用要素>
         self.taigen = taigen
         self.yogen = yogen
         self.adverb = adverb
@@ -228,6 +240,8 @@ class Chunk:
             self.nrn,             # 正規化代表表記
             self.mrn,             # 主辞代表表記
             self.pc,              # 助詞の格
+            self.rentai,          # <連体修飾>
+            self.renyo,           # <連用要素>
             self.taigen,          # 体言
             self.yogen,           # 用言
             self.adverb,          # 副詞
@@ -365,7 +379,7 @@ def pyknp_search_AdjectiveNoun(comment_list): #形容詞連体修飾-名詞(美�
 
 def pyknp_search_NounAdjective(comment_list): #名詞-形容詞連用(ご飯は美味しい)
     def chunk_isRoot(chunk):
-        if chunk.yogen=="形" and chunk.pc=="連用":
+        if chunk.yogen=="形" and chunk.renyo==1:
             return True
         else:
             return False
