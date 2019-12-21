@@ -373,7 +373,7 @@ def pyknp_search_AdjectiveNoun(comment_list): #形容詞連体修飾-名詞(美�
                 if chunk_isChild(dst_chunk):
                     pair_chunks.append([chunk, dst_chunk])
     
-    search_result = [[i[0].midasi, i[1].midasi] for i in pair_chunks]
+    search_result = [[i[0].nrn.split("/")[0], i[1].nrn.split("/")[0]] for i in pair_chunks]
 
     return search_result
 
@@ -419,7 +419,7 @@ def pyknp_search_NounAdjective(comment_list): #名詞-形容詞連用(ご飯は�
         pair_chunks[i].append(adverbs)
         pair_chunks[i].append(nokakus)
 
-    search_result = [[cl[0].midasi, cl[1].midasi, "adverb:["+"/".join([c.midasi for c in cl[2]])+"]", "nokaku:["+"/".join([c.midasi for c in cl[3]])+"]"] for cl in pair_chunks]
+    search_result = [[cl[0].nrn.split("/")[0], cl[1].nrn.split("/")[0], "adverb:["+"/".join([c.nrn.split("/")[0] for c in cl[2]])+"]", "nokaku:["+"/".join([c.nrn.split("/")[0] for c in cl[3]])+"]"] for cl in pair_chunks]
 
     return search_result
 
