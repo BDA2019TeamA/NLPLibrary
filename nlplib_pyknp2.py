@@ -424,19 +424,40 @@ def pyknp_search_NounAdjective(comment_list): #名詞-形容詞連用(ご飯は�
                         continue
                     if chunk_isChild(next_chunk):
                         adverbs = search_adverb(comment_list, chunk.sid, chunk.cid)
-                        pair_chunks.append([next_chunk, [chunk, adverbs]])
+                        tokakus = []
+                        now = next_chunk
+                        while(len(now.srcs)>0):
+                            flag = 0
+                            for sr in now.srcs:
+                                if comment_list[sid][sr].taigen==1 and comment_list[sid][sr].pc=="ト格":
+                                    now = comment_list[sid][sr]
+                                    tokakus.append(now)
+                                    flag=1
+                                    break
+                            if flag==0:
+                                break
+                        tokakus.insert(0, next_chunk)
+                        nokakus_list = []
+                        for tokaku in tokakus:
+                            nokakus = []
+                            for id in tokaku.srcs:
+                                if comment_list[sid][id].pc=="ノ格":
+                                    nokakus.append(comment_list[sid][id])
+                            nokakus_list.append(nokakus)
+                        pair_chunks.append([[tokakus, nokakus_list], [chunk, adverbs]])
                     stack.extend(next_chunk.srcs)
-
+    """
     for i, pair in enumerate(pair_chunks):
         nokakus = []
-        sentence_id = pair[0].sid
-        for id in pair[0].srcs:
+        sentence_id = pair[0][0].sid
+        for id in pair[0][0].srcs:
             if comment_list[sentence_id][id].pc=="ノ格":
                 nokakus.append(comment_list[sentence_id][id])
 
         pair_chunks[i].append(nokakus)
+    """
 
-    search_result = [[cl[0].nrn.split("/")[0], "nokaku:["+"/".join([c.nrn.split("/")[0] for c in cl[2]])+"]", cl[1][0].nrn.split("/")[0], "adverb:["+"/".join([c.nrn.split("/")[0] for c in cl[1][1]])+"]", "否定表現:"+str(cl[1][0].deny)] for cl in pair_chunks]
+    search_result = [["tokakus:["+"/".join([c.nrn.split("/")[0] for c in cl[0][0]])+"]", "nokakus:[",["/".join([c.nrn.split("/")[0] for c in nl]) for nl in cl[0][1]],"]", cl[1][0].nrn.split("/")[0], "adverb:["+"/".join([c.nrn.split("/")[0] for c in cl[1][1]])+"]", "否定表現:"+str(cl[1][0].deny)] for cl in pair_chunks]
 
     return search_result
 
@@ -498,11 +519,33 @@ def pyknp_search_NounVerb(comment_list): #名詞-動詞(私は飽きた)
                         continue
                     if chunk_isChild(next_chunk):
                         adverbs = search_adverb(comment_list, chunk.sid, chunk.cid)
-                        pair_chunks.append([next_chunk, [chunk, adverbs]])
+                        tokakus = []
+                        now = next_chunk
+                        while(len(now.srcs)>0):
+                            flag = 0
+                            for sr in now.srcs:
+                                if comment_list[sid][sr].taigen==1 and comment_list[sid][sr].pc=="ト格":
+                                    now = comment_list[sid][sr]
+                                    tokakus.append(now)
+                                    flag = 1
+                                    break
+                            if flag==0:
+                                break
+                        tokakus.insert(0, next_chunk)
+                        nokakus_list = []
+                        for tokaku in tokakus:
+                            nokakus = []
+                            for id in tokaku.srcs:
+                                if comment_list[sid][id].pc=="ノ格":
+                                    nokakus.append(comment_list[sid][id])
+                            nokakus_list.append(nokakus)
+                        pair_chunks.append([[tokakus, nokakus_list], [chunk, adverbs]])
                     stack.extend(next_chunk.srcs)
     
-    search_result = [[cl[0].nrn.split("/")[0], cl[1][0].nrn.split("/")[0], "adverb:["+"/".join([c.nrn.split("/")[0] for c in cl[1][1]])+"]", "否定表現:"+str(cl[1][0].deny)] for cl in pair_chunks]
-    
+    #search_result = [[cl[0][0].nrn.split("/")[0],"tokakus:["+"/".join([c.nrn.split("/")[0] for c in cl[0][1]])+"]", cl[1][0].nrn.split("/")[0], "adverb:["+"/".join([c.nrn.split("/")[0] for c in cl[1][1]])+"]", "否定表現:"+str(cl[1][0].deny)] for cl in pair_chunks]
+    search_result = [["tokakus:["+"/".join([c.nrn.split("/")[0] for c in cl[0][0]])+"]", "nokakus:[",["/".join([c.nrn.split("/")[0] for c in nl]) for nl in cl[0][1]],"]", cl[1][0].nrn.split("/")[0], "adverb:["+"/".join([c.nrn.split("/")[0] for c in cl[1][1]])+"]", "否定表現:"+str(cl[1][0].deny)] for cl in pair_chunks]
+
+
     return search_result
 
 
