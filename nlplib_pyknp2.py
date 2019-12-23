@@ -91,6 +91,12 @@ def fst_parsing_rentai_renyo(fstring):
     renyo = 1 if renyo=="<連用要素>" else 0
     return rentai, renyo, fstring
 
+def fst_parsing_denial(fstring):
+    pattern = r"<否定表現>"
+    deny, fstring = fst_parsing_skel(fstring, pattern, "")
+    deny = 1 if deny=="<否定表現>" else 0
+    return deny, fstring
+
 
 ##### Morph
 
@@ -199,7 +205,7 @@ class Tag:
 
 
 ##### Chunk
-Chunk_series_columns = ['文番号','文節番号','ID','src','見出し','掛先ID', '係り受けタイプ','正規化代表表記','主辞代表表記','係:','連体修飾','連用要素', '体言','用言','副詞','素性']
+Chunk_series_columns = ['文番号','文節番号','ID','src','見出し','掛先ID', '係り受けタイプ','正規化代表表記','主辞代表表記','係:','連体修飾','連用要素', '体言','用言','副詞','否定','素性']
 
 class Chunk:
     def __init__(self, sid, cid, bnst):
@@ -219,6 +225,7 @@ class Chunk:
         adverb, fstring = fst_parsing_adverb(fstring)
         head, tail, fstring = fst_parsing_head_tail(fstring)
         rentai, renyo, fstring = fst_parsing_rentai_renyo(fstring)
+        deny, fstring = fst_parsing_denial(fstring)
         self.nrn = nrn
         self.mrn = mrn
         self.pc = pc
@@ -229,6 +236,7 @@ class Chunk:
         self.adverb = adverb
         self.isHead = head
         self.isTail = tail
+        self.deny = deny       # <否定表現>
         self.fstring = fstring
 
     def make_chunk_series_list(self):
@@ -248,6 +256,7 @@ class Chunk:
             self.taigen,          # 体言
             self.yogen,           # 用言
             self.adverb,          # 副詞
+            self.deny,            # 否定表現
             self.fstring          # 残りの素性
         ]
     
@@ -384,7 +393,7 @@ def pyknp_search_AdjectiveNoun(comment_list): #形容詞連体修飾-名詞(美�
                     adverbs = search_adverb(comment_list, chunk.sid, chunk.cid) # 形容詞にかかる副詞を探索
                     pair_chunks.append([[chunk, adverbs], dst_chunk])
     
-    search_result = [[i[0][0].nrn.split("/")[0], "/".join([c.nrn.split("/")[0] for c in i[0][1]]), i[1].nrn.split("/")[0]] for i in pair_chunks]
+    search_result = [[i[0][0].nrn.split("/")[0], "/".join([c.nrn.split("/")[0] for c in i[0][1]]), "否定表現:"+str(i[0][0].deny), i[1].nrn.split("/")[0]] for i in pair_chunks]
 
     return search_result
 
@@ -427,7 +436,7 @@ def pyknp_search_NounAdjective(comment_list): #名詞-形容詞連用(ご飯は�
 
         pair_chunks[i].append(nokakus)
 
-    search_result = [[cl[0].nrn.split("/")[0], cl[1][0].nrn.split("/")[0], "adverb:["+"/".join([c.nrn.split("/")[0] for c in cl[1][1]])+"]", "nokaku:["+"/".join([c.nrn.split("/")[0] for c in cl[2]])+"]"] for cl in pair_chunks]
+    search_result = [[cl[0].nrn.split("/")[0], "nokaku:["+"/".join([c.nrn.split("/")[0] for c in cl[2]])+"]", cl[1][0].nrn.split("/")[0], "adverb:["+"/".join([c.nrn.split("/")[0] for c in cl[1][1]])+"]", "否定表現:"+str(cl[1][0].deny)] for cl in pair_chunks]
 
     return search_result
 
@@ -457,7 +466,7 @@ def pyknp_search_VerbNoun(comment_list): #動詞-名詞(飽きない味)
                     adverbs = search_adverb(comment_list, chunk.sid, chunk.cid)
                     pair_chunks.append([[chunk, adverbs], dst_chunk])
     
-    search_result = [[i[0][0].nrn.split("/")[0], "/".join([c.nrn.split("/")[0] for c in i[0][1]]), i[1].nrn.split("/")[0]] for i in pair_chunks]
+    search_result = [[i[0][0].nrn.split("/")[0], "/".join([c.nrn.split("/")[0] for c in i[0][1]]), "否定表現:"+str(i[0][0].deny), i[1].nrn.split("/")[0]] for i in pair_chunks]
 
     return search_result
 
@@ -492,7 +501,7 @@ def pyknp_search_NounVerb(comment_list): #名詞-動詞(私は飽きた)
                         pair_chunks.append([next_chunk, [chunk, adverbs]])
                     stack.extend(next_chunk.srcs)
     
-    search_result = [[cl[0].nrn.split("/")[0], cl[1][0].nrn.split("/")[0], "adverb:["+"/".join([c.nrn.split("/")[0] for c in cl[1][1]])+"]"] for cl in pair_chunks]
+    search_result = [[cl[0].nrn.split("/")[0], cl[1][0].nrn.split("/")[0], "adverb:["+"/".join([c.nrn.split("/")[0] for c in cl[1][1]])+"]", "否定表現:"+str(cl[1][0].deny)] for cl in pair_chunks]
     
     return search_result
 
