@@ -424,6 +424,63 @@ def pyknp_search_NounAdjective(comment_list): #名詞-形容詞連用(ご飯は�
     return search_result
 
 
+def pyknp_search_VerbNoun(comment_list): #動詞-名詞(飽きない味)
+    def chunk_isRoot(chunk):
+        if chunk.yogen=="動" and chunk.rentai==1:
+            return True
+        else:
+            return False
+    
+    def chunk_isChild(chunk):
+        if chunk.taigen==1:
+            return True
+        else:
+            return False
+    
+    pair_chunks = []
+    for sid, sentence_list in enumerate(comment_list):
+        for cid, chunk in enumerate(sentence_list):
+            if chunk_isRoot(chunk):
+                id = chunk.cid
+                if chunk.dst==-1 or chunk.isTail:
+                    continue
+                dst_chunk = sentence_list[chunk.dst]
+                if chunk_isChild(dst_chunk):
+                    pair_chunks.append([chunk, dst_chunk])
+    
+    search_result = [[i[0].nrn.split("/")[0], i[1].nrn.split("/")[0]] for i in pair_chunks]
+
+    return search_result
+
+"""
+def pyknp_search_NounVerb(comment_list): #名詞-動詞(私は飽きた)
+    def chunk_isRoot(chunk):
+        if chunk.yogen=="形" and chunk.renyo==1:
+            return True
+        else:
+            return False
+    
+    def chunk_isChild(chunk):
+        if chunk.taigen==1:
+            for tag in chunk.tags:
+                if tag.ecase=="ガ":
+                    return True
+        return False
+
+    pair_chunks = []
+    for sid, sentence_list in enumerate(comment_list):
+        for cid, chunk in enumerate(sentence_list):
+            if chunk_isRoot(chunk):
+                stack = []
+                stack.extend(chunk.srcs)
+                while len(stack)>0:
+                    next_id = stack.pop()
+                    next_chunk = sentence_list[next_id]
+                    if chunk_isChild(next_chunk):
+                        pair_chunks.append([next_chunk, chunk])
+                    stack.extend(next_chunk.srcs)
+"""
+
 if __name__ == '__main__':
     knp = KNP(option = '-tab -anaphora', jumanpp=True)
     text = """
