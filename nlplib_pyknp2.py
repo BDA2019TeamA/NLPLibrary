@@ -70,9 +70,11 @@ def fst_parsing_head_tail(fstring):
     head, fstring = fst_parsing_skel(fstring, hpat, "")
     head = 1 if head=="<文頭>" else 0
 
-    tpat = r"<文末>"
+    #tpat = r"<文末>"
+    tpat = r"<ID:（文末）>"
     tail, fstring = fst_parsing_skel(fstring, tpat, "")
-    tail = 1 if tail=="<文末>" else 0
+    #tail = 1 if tail=="<文末>" else 0
+    tail = 1 if tail=="<ID:（文末）>" else 0
     return head, tail, fstring
 
 def fst_parsing_EstimatedCase(fstring):
@@ -409,6 +411,8 @@ def pyknp_search_NounAdjective(comment_list): #名詞-形容詞連用(ご飯は�
                 while len(stack)>0:
                     next_id = stack.pop()
                     next_chunk = sentence_list[next_id]
+                    if next_chunk.dst==-1 or next_chunk.isTail:
+                        continue
                     if chunk_isChild(next_chunk):
                         adverbs = search_adverb(comment_list, chunk.sid, chunk.cid)
                         pair_chunks.append([next_chunk, [chunk, adverbs]])
@@ -481,6 +485,8 @@ def pyknp_search_NounVerb(comment_list): #名詞-動詞(私は飽きた)
                 while len(stack)>0:
                     next_id = stack.pop()
                     next_chunk = sentence_list[next_id]
+                    if next_chunk.dst==-1 or next_chunk.isTail:
+                        continue
                     if chunk_isChild(next_chunk):
                         adverbs = search_adverb(comment_list, chunk.sid, chunk.cid)
                         pair_chunks.append([next_chunk, [chunk, adverbs]])
