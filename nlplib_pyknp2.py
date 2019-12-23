@@ -450,9 +450,10 @@ def pyknp_search_VerbNoun(comment_list): #動詞-名詞(飽きない味)
                     continue
                 dst_chunk = sentence_list[chunk.dst]
                 if chunk_isChild(dst_chunk):
-                    pair_chunks.append([chunk, dst_chunk])
+                    adverbs = search_adverb(comment_list, chunk.sid, chunk.cid)
+                    pair_chunks.append([[chunk, adverbs], dst_chunk])
     
-    search_result = [[i[0].nrn.split("/")[0], i[1].nrn.split("/")[0]] for i in pair_chunks]
+    search_result = [[i[0][0].nrn.split("/")[0], "/".join([c.nrn.split("/")[0] for c in i[0][1]]), i[1].nrn.split("/")[0]] for i in pair_chunks]
 
     return search_result
 
