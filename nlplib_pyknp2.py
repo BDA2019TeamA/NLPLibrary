@@ -457,10 +457,10 @@ def pyknp_search_VerbNoun(comment_list): #動詞-名詞(飽きない味)
 
     return search_result
 
-"""
+
 def pyknp_search_NounVerb(comment_list): #名詞-動詞(私は飽きた)
     def chunk_isRoot(chunk):
-        if chunk.yogen=="形" and chunk.renyo==1:
+        if chunk.yogen=="動" and chunk.renyo==1:
             return True
         else:
             return False
@@ -482,9 +482,14 @@ def pyknp_search_NounVerb(comment_list): #名詞-動詞(私は飽きた)
                     next_id = stack.pop()
                     next_chunk = sentence_list[next_id]
                     if chunk_isChild(next_chunk):
-                        pair_chunks.append([next_chunk, chunk])
+                        adverbs = search_adverb(comment_list, chunk.sid, chunk.cid)
+                        pair_chunks.append([next_chunk, [chunk, adverbs]])
                     stack.extend(next_chunk.srcs)
-"""
+    
+    search_result = [[cl[0].nrn.split("/")[0], cl[1][0].nrn.split("/")[0], "adverb:["+"/".join([c.nrn.split("/")[0] for c in cl[1][1]])+"]"] for cl in pair_chunks]
+    
+    return search_result
+
 
 if __name__ == '__main__':
     knp = KNP(option = '-tab -anaphora', jumanpp=True)
