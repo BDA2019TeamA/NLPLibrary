@@ -89,6 +89,7 @@ def fst_parsing_rentai_renyo(fstring):
     renyo = 1 if renyo=="<連用要素>" else 0
     return rentai, renyo, fstring
 
+
 ##### Morph
 
 def imis_parsing_repname(string):
@@ -348,6 +349,13 @@ def pyknp_dependency_visualize(comment_list, withstr=False):
         #g.write_png("result.png")
         display_png(Image(g.create_png()))
 
+def search_adverb(comment_list, sid, cid):
+    adverbs = []
+    for id in comment_list[sid][cid].srcs:
+        if comment_list[sid][id].adverb==1:
+            adverbs.append(comment_list[sid][id])
+    return adverbs
+
 
 def pyknp_search_AdjectiveNoun(comment_list): #形容詞連体修飾-名詞(美味しいご飯)
     def chunk_isRoot(chunk):
@@ -371,9 +379,10 @@ def pyknp_search_AdjectiveNoun(comment_list): #形容詞連体修飾-名詞(美�
                     continue
                 dst_chunk = sentence_list[chunk.dst]
                 if chunk_isChild(dst_chunk):
-                    pair_chunks.append([chunk, dst_chunk])
+                    adverbs = search_adverb(comment_list, chunk.sid, chunk.cid) # 形容詞にかかる副詞を探索
+                    pair_chunks.append([[chunk, adverbs], dst_chunk])
     
-    search_result = [[i[0].nrn.split("/")[0], i[1].nrn.split("/")[0]] for i in pair_chunks]
+    search_result = [[i[0][0].nrn.split("/")[0], "/".join([c.nrn.split("/")[0] for c in i[0][1]]), i[1].nrn.split("/")[0]] for i in pair_chunks]
 
     return search_result
 
@@ -401,25 +410,20 @@ def pyknp_search_NounAdjective(comment_list): #名詞-形容詞連用(ご飯は�
                     next_id = stack.pop()
                     next_chunk = sentence_list[next_id]
                     if chunk_isChild(next_chunk):
-                        pair_chunks.append([next_chunk, chunk])
+                        adverbs = search_adverb(comment_list, chunk.sid, chunk.cid)
+                        pair_chunks.append([next_chunk, [chunk, adverbs]])
                     stack.extend(next_chunk.srcs)
 
     for i, pair in enumerate(pair_chunks):
-        sentence_id = pair[0].sid
-        adverbs = []
-        for id in pair[1].srcs:
-            if comment_list[sentence_id][id].adverb==1:
-                adverbs.append(comment_list[sentence_id][id])
-        
         nokakus = []
+        sentence_id = pair[0].sid
         for id in pair[0].srcs:
             if comment_list[sentence_id][id].pc=="ノ格":
                 nokakus.append(comment_list[sentence_id][id])
 
-        pair_chunks[i].append(adverbs)
         pair_chunks[i].append(nokakus)
 
-    search_result = [[cl[0].nrn.split("/")[0], cl[1].nrn.split("/")[0], "adverb:["+"/".join([c.nrn.split("/")[0] for c in cl[2]])+"]", "nokaku:["+"/".join([c.nrn.split("/")[0] for c in cl[3]])+"]"] for cl in pair_chunks]
+    search_result = [[cl[0].nrn.split("/")[0], cl[1][0].nrn.split("/")[0], "adverb:["+"/".join([c.nrn.split("/")[0] for c in cl[1][1]])+"]", "nokaku:["+"/".join([c.nrn.split("/")[0] for c in cl[2]])+"]"] for cl in pair_chunks]
 
     return search_result
 
