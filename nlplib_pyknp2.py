@@ -218,6 +218,7 @@ class Chunk:
         self.srcs = []
         self.midasi = "".join(mrph.midasi for mrph in bnst.mrph_list())
         self.dpndtype = bnst.dpndtype
+        print(bnst.fstring)
         nrn, fstring = fst_parsing_NormReprNotation(bnst.fstring)
         mrn, fstring = fst_parsing_MainReprNotation(fstring)
         pc, fstring = fst_parsing_particleCase(fstring)
@@ -545,7 +546,35 @@ def pyknp_search_NounVerb(comment_list): #名詞-動詞(私は飽きた)
     #search_result = [[cl[0][0].nrn.split("/")[0],"tokakus:["+"/".join([c.nrn.split("/")[0] for c in cl[0][1]])+"]", cl[1][0].nrn.split("/")[0], "adverb:["+"/".join([c.nrn.split("/")[0] for c in cl[1][1]])+"]", "否定表現:"+str(cl[1][0].deny)] for cl in pair_chunks]
     search_result = [["tokakus:["+"/".join([c.nrn.split("/")[0] for c in cl[0][0]])+"]", "nokakus:[",["/".join([c.nrn.split("/")[0] for c in nl]) for nl in cl[0][1]],"]", cl[1][0].nrn.split("/")[0], "adverb:["+"/".join([c.nrn.split("/")[0] for c in cl[1][1]])+"]", "否定表現:"+str(cl[1][0].deny)] for cl in pair_chunks]
 
+    return search_result
 
+
+def pyknp_search_NounNoun(comment_list):
+    def chunk_isRoot(chunk):
+        if chunk.taigen==1:
+            for tag in chunk.tags:
+                if tag.ecase=="ガ":
+                    return True
+        else:
+            return False
+    
+    def chunk_isChild(chunk):
+        if chunk.taigen==1:
+            return True
+        return False
+
+    pair_chunks = []
+    for sid, sentence_list in enumerate(comment_list):
+        for cid, chunk in enumerate(sentence_list):
+            if chunk_isRoot(chunk):
+                id = chunk.cid
+                if chunk.dst==-1 or chunk.isTail:
+                    continue
+                dst_chunk = sentence_list[chunk.dst]
+                if chunk_isChild(dst_chunk):
+                    pair_chunks.append([chunk, dst_chunk])
+
+    search_result = [[i[0].nrn.split("/")[0],"否定表現:"+str(i[0].deny), i[1].nrn.split("/")[0], "否定表現:"+str(i[1].deny)] for i in pair_chunks]
     return search_result
 
 
