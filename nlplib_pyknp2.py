@@ -97,6 +97,8 @@ def fst_parsing_denial(fstring):
     deny = 1 if deny=="<否定表現>" else 0
     return deny, fstring
 
+def get_nrn(chunk):
+    return chunk.nrn.split("/")[0]
 
 ##### Morph
 
@@ -394,13 +396,21 @@ def pyknp_search_AdjectiveNoun(comment_list): #形容詞連体修飾-名詞(美�
                     adverbs = search_adverb(comment_list, chunk.sid, chunk.cid) # 形容詞にかかる副詞を探索
                     pair_chunks.append([[chunk, adverbs], dst_chunk])
     
-    search_result = [[i[0][0].nrn.split("/")[0], "/".join([c.nrn.split("/")[0] for c in i[0][1]]), "否定表現:"+str(i[0][0].deny), i[1].nrn.split("/")[0]] for i in pair_chunks]
+    search_result = [[
+        get_nrn(i[0][0]),                         # adj
+        "/".join([get_nrn(c) for c in i[0][1]]),  # adv
+        i[0][0].deny,                             # not
+        get_nrn(i[1]),                            # noun
+        "",                                       # nokaku (now null)
+        i[1].deny                                 # not
+    ]for i in pair_chunks]
 
     return search_result
 
+
 def pyknp_search_NounAdjective(comment_list): #名詞-形容詞連用(ご飯は美味しい)
     def chunk_isRoot(chunk):
-        if chunk.yogen=="形" and chunk.renyo==1:
+        if chunk.yogen=="形" and chunk.rentai==0:
             return True
         else:
             return False
@@ -445,20 +455,18 @@ def pyknp_search_NounAdjective(comment_list): #名詞-形容詞連用(ご飯は�
                                 if comment_list[sid][id].pc=="ノ格":
                                     nokakus.append(comment_list[sid][id])
                             nokakus_list.append(nokakus)
+                        assert len(tokakus) == len(nokakus_list)
                         pair_chunks.append([[tokakus, nokakus_list], [chunk, adverbs]])
                     stack.extend(next_chunk.srcs)
-    """
-    for i, pair in enumerate(pair_chunks):
-        nokakus = []
-        sentence_id = pair[0][0].sid
-        for id in pair[0][0].srcs:
-            if comment_list[sentence_id][id].pc=="ノ格":
-                nokakus.append(comment_list[sentence_id][id])
 
-        pair_chunks[i].append(nokakus)
-    """
-
-    search_result = [["tokakus:["+"/".join([c.nrn.split("/")[0] for c in cl[0][0]])+"]", "nokakus:[",["/".join([c.nrn.split("/")[0] for c in nl]) for nl in cl[0][1]],"]", cl[1][0].nrn.split("/")[0], "adverb:["+"/".join([c.nrn.split("/")[0] for c in cl[1][1]])+"]", "否定表現:"+str(cl[1][0].deny)] for cl in pair_chunks]
+    search_result = [[
+        get_nrn(cl[1][0]),                                       # adj
+        "/".join([get_nrn(c) for c in cl[1][1]]),                # adv
+        cl[1][0].deny,                                           # not
+        [get_nrn(c) for c in cl[0][0]],                          # noun
+        ["/".join([get_nrn(c) for c in nl]) for nl in cl[0][1]], # nokaku
+        [c.deny for c in cl[0][0]]                               # not
+    ]for cl in pair_chunks]
 
     return search_result
 
@@ -488,14 +496,21 @@ def pyknp_search_VerbNoun(comment_list): #動詞-名詞(飽きない味)
                     adverbs = search_adverb(comment_list, chunk.sid, chunk.cid)
                     pair_chunks.append([[chunk, adverbs], dst_chunk])
     
-    search_result = [[i[0][0].nrn.split("/")[0], "/".join([c.nrn.split("/")[0] for c in i[0][1]]), "否定表現:"+str(i[0][0].deny), i[1].nrn.split("/")[0]] for i in pair_chunks]
+    search_result = [[
+        get_nrn(i[0][0]),                        # verb
+        "/".join([get_nrn(c) for c in i[0][1]]), # adv
+        i[0][0].deny,                            # not
+        get_nrn(i[1]),                           # noun
+        "",                                      # nokaku(now null)
+        i[1].deny                                # not
+    ]for i in pair_chunks]
 
     return search_result
 
 
 def pyknp_search_NounVerb(comment_list): #名詞-動詞(私は飽きた)
     def chunk_isRoot(chunk):
-        if chunk.yogen=="動" and chunk.renyo==1:
+        if chunk.yogen=="動" and chunk.rentai==0:
             return True
         else:
             return False
@@ -544,7 +559,14 @@ def pyknp_search_NounVerb(comment_list): #名詞-動詞(私は飽きた)
                     stack.extend(next_chunk.srcs)
     
     #search_result = [[cl[0][0].nrn.split("/")[0],"tokakus:["+"/".join([c.nrn.split("/")[0] for c in cl[0][1]])+"]", cl[1][0].nrn.split("/")[0], "adverb:["+"/".join([c.nrn.split("/")[0] for c in cl[1][1]])+"]", "否定表現:"+str(cl[1][0].deny)] for cl in pair_chunks]
-    search_result = [["tokakus:["+"/".join([c.nrn.split("/")[0] for c in cl[0][0]])+"]", "nokakus:[",["/".join([c.nrn.split("/")[0] for c in nl]) for nl in cl[0][1]],"]", cl[1][0].nrn.split("/")[0], "adverb:["+"/".join([c.nrn.split("/")[0] for c in cl[1][1]])+"]", "否定表現:"+str(cl[1][0].deny)] for cl in pair_chunks]
+    search_result = [[
+        get_nrn(cl[1][0]),                                      # verb
+        "/".join([get_nrn(c) for c in cl[1][1]]),               # adv
+        cl[1][0].deny,                                          # not
+        [get_nrn(c) for c in cl[0][0]],                         # noun
+        ["/".join([get_nrn(c) for c in nl]) for nl in cl[0][1]],# nokaku
+        [c.deny for c in cl[0][0]]                              # not
+    ]for cl in pair_chunks]
 
     return search_result
 
@@ -574,7 +596,14 @@ def pyknp_search_NounNoun(comment_list):
                 if chunk_isChild(dst_chunk):
                     pair_chunks.append([chunk, dst_chunk])
 
-    search_result = [[i[0].nrn.split("/")[0],"否定表現:"+str(i[0].deny), i[1].nrn.split("/")[0], "否定表現:"+str(i[1].deny)] for i in pair_chunks]
+    search_result = [[
+        get_nrn(i[1]),      # noun
+        "",                 # nokaku (now null)
+        i[1].deny,          # not
+        get_nrn(i[0]),      # noun
+        "",                 # nokaku (now null)
+        i[0].deny           # not
+    ]for i in pair_chunks]
     return search_result
 
 
