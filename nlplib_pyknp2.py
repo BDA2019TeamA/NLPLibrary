@@ -98,7 +98,9 @@ def fst_parsing_denial(fstring):
     return deny, fstring
 
 def get_nrn(chunk):
-    return chunk.nrn.split("/")[0]
+    #chunk.nrn.split("/")[0]
+    nl = "".join([basis.split("/")[0] for basis in chunk.nrn.split("+")])
+    return nl
 
 ##### Morph
 
@@ -220,7 +222,6 @@ class Chunk:
         self.srcs = []
         self.midasi = "".join(mrph.midasi for mrph in bnst.mrph_list())
         self.dpndtype = bnst.dpndtype
-        print(bnst.fstring)
         nrn, fstring = fst_parsing_NormReprNotation(bnst.fstring)
         mrn, fstring = fst_parsing_MainReprNotation(fstring)
         pc, fstring = fst_parsing_particleCase(fstring)
@@ -460,7 +461,6 @@ def pyknp_search_NounAdjective(comment_list): #名詞-形容詞連用(ご飯は�
                     stack.extend(next_chunk.srcs)
 
     search_result = []
-
     for cl in pair_chunks:
         for i in range(len(cl[0][0])):
             search_result.append([
@@ -612,6 +612,24 @@ def pyknp_search_NounNoun(comment_list):
         i[0].deny           # not
     ]for i in pair_chunks]
     return search_result
+
+
+def knp_analyze(text, knp, lines_split=False):
+    comment_list = pyknp_make_commentlist(text, knp, lines_split=False)
+    adj_noun = pyknp_search_AdjectiveNoun(comment_list)
+    noun_adj = pyknp_search_NounAdjective(comment_list)
+    verb_noun = pyknp_search_VerbNoun(comment_list)
+    noun_verb = pyknp_search_NounVerb(comment_list)
+    noun_noun = pyknp_search_NounNoun(comment_list)
+
+    print("adj_noun\n", adj_noun)
+    print("noun_adj\n", noun_adj)
+    print("verb_noun\n", verb_noun)
+    print("noun_verb\n", noun_verb)
+    print("noun_noun\n", noun_noun)
+
+    result = adj_noun + noun_adj + verb_noun + noun_verb + noun_noun
+    return result
 
 
 if __name__ == '__main__':
