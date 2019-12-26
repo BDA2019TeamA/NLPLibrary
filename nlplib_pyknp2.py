@@ -97,6 +97,17 @@ def fst_parsing_denial(fstring):
     deny = 1 if deny=="<否定表現>" else 0
     return deny, fstring
 
+def fst_parsing_predicates(fstring):
+    pattern1 = r"<状態述語>"
+    pred1, fstring = fst_parsing_skel(fstring, pattern1, "")
+    pred1 = 1 if pred1=="<状態述語>" else 0
+
+    pattern2 = r"<動態述語>"
+    pred2, fstring = fst_parsing_skel(fstring, pattern2, "")
+    pred2 = 1 if pred2=="<動態述語>" else 0
+
+    return pred1, pred2, fstring
+
 def get_nrn(chunk):
     #chunk.nrn.split("/")[0]
     nl = "".join([basis.split("/")[0] for basis in chunk.nrn.split("+")])
@@ -209,7 +220,7 @@ class Tag:
 
 
 ##### Chunk
-Chunk_series_columns = ['文番号','文節番号','ID','src','見出し','掛先ID', '係り受けタイプ','正規化代表表記','主辞代表表記','係:','連体修飾','連用要素', '体言','用言','副詞','否定','素性']
+Chunk_series_columns = ['文番号','文節番号','ID','src','見出し','掛先ID', '係り受けタイプ','正規化代表表記','主辞代表表記','係:','連体修飾','連用要素', '体言','用言','副詞','否定','状態述語','動態述語','素性']
 
 class Chunk:
     def __init__(self, sid, cid, bnst):
@@ -230,6 +241,7 @@ class Chunk:
         head, tail, fstring = fst_parsing_head_tail(fstring)
         rentai, renyo, fstring = fst_parsing_rentai_renyo(fstring)
         deny, fstring = fst_parsing_denial(fstring)
+        pred1, pred2, fstring = fst_parsing_predicates(fstring)
         self.nrn = nrn
         self.mrn = mrn
         self.pc = pc
@@ -241,6 +253,8 @@ class Chunk:
         self.isHead = head
         self.isTail = tail
         self.deny = deny       # <否定表現>
+        self.pred1 = pred1     # <状態述語>
+        self.pred2 = pred2     # <動態述語>
         self.fstring = fstring
 
     def make_chunk_series_list(self):
@@ -261,6 +275,8 @@ class Chunk:
             self.yogen,           # 用言
             self.adverb,          # 副詞
             self.deny,            # 否定表現
+            self.pred1,           # <状態述語>
+            self.pred2,           # <動態述語>
             self.fstring          # 残りの素性
         ]
     
@@ -372,6 +388,7 @@ def search_adverb(comment_list, sid, cid):
     return adverbs
 
 
+
 def pyknp_search_AdjectiveNoun(comment_list): #形容詞連体修飾-名詞(美味しいご飯)
     def chunk_isRoot(chunk):
         if chunk.yogen=="形" and chunk.pc=="連格":
@@ -430,7 +447,8 @@ def pyknp_search_NounAdjective(comment_list): #名詞-形容詞連用(ご飯は�
         return False
 
     def chunk_stop(chunk):
-        if chunk.dst==-1 or chunk.isTail:
+        #if chunk.dst==-1 or chunk.isTail:
+        if chunk.pred1==1 or chunk.pred2==1:
             return True
         else:
             return False
@@ -444,7 +462,7 @@ def pyknp_search_NounAdjective(comment_list): #名詞-形容詞連用(ご飯は�
                 while len(stack)>0:
                     next_id = stack.pop()
                     next_chunk = sentence_list[next_id]
-                    if chunk_stop(chunk):
+                    if chunk_stop(next_chunk):
                         continue
                     if chunk_isChild(next_chunk):
                         adverbs = search_adverb(comment_list, chunk.sid, chunk.cid)
@@ -545,7 +563,8 @@ def pyknp_search_NounVerb(comment_list): #名詞-動詞(私は飽きた)
         return False
     
     def chunk_stop(chunk):
-        if chunk.dst==-1 or chunk.isTail:
+        #if chunk.dst==-1 or chunk.isTail:
+        if chunk.pred1==1 or chunk.pred2==1:
             return True
         else:
             return False
@@ -559,7 +578,7 @@ def pyknp_search_NounVerb(comment_list): #名詞-動詞(私は飽きた)
                 while len(stack)>0:
                     next_id = stack.pop()
                     next_chunk = sentence_list[next_id]
-                    if chunk_stop(chunk):
+                    if chunk_stop(next_chunk):
                         continue
                     if chunk_isChild(next_chunk):
                         adverbs = search_adverb(comment_list, chunk.sid, chunk.cid)
