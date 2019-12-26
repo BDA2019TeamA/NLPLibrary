@@ -440,9 +440,11 @@ def pyknp_search_NounAdjective(comment_list): #名詞-形容詞連用(ご飯は�
             return False
     
     def chunk_isChild(chunk):
+        if chunk.pc=="未格":
+            return True
         if chunk.taigen==1:
             for tag in chunk.tags:
-                if tag.ecase=="ガ":
+                if tag.ecase=="ガ" or tag.pc=="ガ格":
                     return True
         return False
 
@@ -556,9 +558,11 @@ def pyknp_search_NounVerb(comment_list): #名詞-動詞(私は飽きた)
             return False
     
     def chunk_isChild(chunk):
+        if chunk.pc=="未格":
+            return True
         if chunk.taigen==1:
             for tag in chunk.tags:
-                if tag.ecase=="ガ":
+                if tag.ecase=="ガ" or tag.pc=="ガ格":
                     return True
         return False
     
@@ -623,12 +627,13 @@ def pyknp_search_NounVerb(comment_list): #名詞-動詞(私は飽きた)
 
 def pyknp_search_NounNoun(comment_list):
     def chunk_isRoot(chunk):
+        if chunk.pc=="未格":
+            return True
         if chunk.taigen==1:
             for tag in chunk.tags:
-                if tag.ecase=="ガ":
+                if tag.ecase=="ガ" or tag.pc=="ガ格":
                     return True
-        else:
-            return False
+        return False
     
     def chunk_isChild(chunk):
         if chunk.taigen==1:
