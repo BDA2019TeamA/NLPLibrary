@@ -663,8 +663,11 @@ def pyknp_search_NounNoun(comment_list):
     return search_result
 
 
-def knp_analyze(text, knp, lines_split=False):
+def knp_analyze(text, knp, lines_split=False, visualize=False):
     comment_list = pyknp_make_commentlist(text, knp, lines_split=False)
+    if visualize:
+        pyknp_dependency_visualize(comment_list, withstr=True)
+
     adj_noun = pyknp_search_AdjectiveNoun(comment_list)
     noun_adj = pyknp_search_NounAdjective(comment_list)
     verb_noun = pyknp_search_VerbNoun(comment_list)
