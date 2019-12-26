@@ -459,14 +459,18 @@ def pyknp_search_NounAdjective(comment_list): #名詞-形容詞連用(ご飯は�
                         pair_chunks.append([[tokakus, nokakus_list], [chunk, adverbs]])
                     stack.extend(next_chunk.srcs)
 
-    search_result = [[
-        get_nrn(cl[1][0]),                                       # adj
-        "/".join([get_nrn(c) for c in cl[1][1]]),                # adv
-        cl[1][0].deny,                                           # not
-        [get_nrn(c) for c in cl[0][0]],                          # noun
-        ["/".join([get_nrn(c) for c in nl]) for nl in cl[0][1]], # nokaku
-        [c.deny for c in cl[0][0]]                               # not
-    ]for cl in pair_chunks]
+    search_result = []
+
+    for cl in pair_chunks:
+        for i in range(len(cl[0][0])):
+            search_result.append([
+                get_nrn(cl[1][0]),                                       # adj
+                "/".join([get_nrn(c) for c in cl[1][1]]),                # adv
+                cl[1][0].deny,                                           # not
+                get_nrn(cl[0][0][i]),                                    # noun
+                "/".join([get_nrn(c) for c in cl[0][1][i]]),             # nokaku
+                cl[0][0][i].deny                                         # not
+            ])
 
     return search_result
 
@@ -555,18 +559,21 @@ def pyknp_search_NounVerb(comment_list): #名詞-動詞(私は飽きた)
                                 if comment_list[sid][id].pc=="ノ格":
                                     nokakus.append(comment_list[sid][id])
                             nokakus_list.append(nokakus)
+                        assert len(tokakus) == len(nokakus_list)
                         pair_chunks.append([[tokakus, nokakus_list], [chunk, adverbs]])
                     stack.extend(next_chunk.srcs)
-    
-    #search_result = [[cl[0][0].nrn.split("/")[0],"tokakus:["+"/".join([c.nrn.split("/")[0] for c in cl[0][1]])+"]", cl[1][0].nrn.split("/")[0], "adverb:["+"/".join([c.nrn.split("/")[0] for c in cl[1][1]])+"]", "否定表現:"+str(cl[1][0].deny)] for cl in pair_chunks]
-    search_result = [[
-        get_nrn(cl[1][0]),                                      # verb
-        "/".join([get_nrn(c) for c in cl[1][1]]),               # adv
-        cl[1][0].deny,                                          # not
-        [get_nrn(c) for c in cl[0][0]],                         # noun
-        ["/".join([get_nrn(c) for c in nl]) for nl in cl[0][1]],# nokaku
-        [c.deny for c in cl[0][0]]                              # not
-    ]for cl in pair_chunks]
+
+    search_result = []
+    for cl in pair_chunks:
+        for i in range(len(cl[0][0])):
+            search_result.append([
+                get_nrn(cl[1][0]),                                       # adj
+                "/".join([get_nrn(c) for c in cl[1][1]]),                # adv
+                cl[1][0].deny,                                           # not
+                get_nrn(cl[0][0][i]),                                    # noun
+                "/".join([get_nrn(c) for c in cl[0][1][i]]),             # nokaku
+                cl[0][0][i].deny                                         # not
+            ])
 
     return search_result
 
