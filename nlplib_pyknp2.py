@@ -384,13 +384,19 @@ def pyknp_search_AdjectiveNoun(comment_list): #形容詞連体修飾-名詞(美�
             return True
         else:
             return False
+    
+    def chunk_stop(chunk):
+        if chunk.dst==-1 or chunk.isTail:
+            return True
+        else:
+            return False
 
     pair_chunks = []
     for sid, sentence_list in enumerate(comment_list):
         for cid, chunk in enumerate(sentence_list):
             if chunk_isRoot(chunk):
                 id = chunk.cid
-                if chunk.dst==-1 or chunk.isTail:
+                if chunk_stop(chunk):
                     continue
                 dst_chunk = sentence_list[chunk.dst]
                 if chunk_isChild(dst_chunk):
@@ -423,6 +429,12 @@ def pyknp_search_NounAdjective(comment_list): #名詞-形容詞連用(ご飯は�
                     return True
         return False
 
+    def chunk_stop(chunk):
+        if chunk.dst==-1 or chunk.isTail:
+            return True
+        else:
+            return False
+
     pair_chunks = []
     for sid, sentence_list in enumerate(comment_list):
         for cid, chunk in enumerate(sentence_list):
@@ -432,7 +444,7 @@ def pyknp_search_NounAdjective(comment_list): #名詞-形容詞連用(ご飯は�
                 while len(stack)>0:
                     next_id = stack.pop()
                     next_chunk = sentence_list[next_id]
-                    if next_chunk.dst==-1 or next_chunk.isTail:
+                    if chunk_stop(chunk):
                         continue
                     if chunk_isChild(next_chunk):
                         adverbs = search_adverb(comment_list, chunk.sid, chunk.cid)
@@ -487,13 +499,19 @@ def pyknp_search_VerbNoun(comment_list): #動詞-名詞(飽きない味)
             return True
         else:
             return False
+        
+    def chunk_stop(chunk):
+        if chunk.dst==-1 or chunk.isTail:
+            return True
+        else:
+            return False
     
     pair_chunks = []
     for sid, sentence_list in enumerate(comment_list):
         for cid, chunk in enumerate(sentence_list):
             if chunk_isRoot(chunk):
                 id = chunk.cid
-                if chunk.dst==-1 or chunk.isTail:
+                if chunk_stop(chunk):
                     continue
                 dst_chunk = sentence_list[chunk.dst]
                 if chunk_isChild(dst_chunk):
@@ -525,6 +543,12 @@ def pyknp_search_NounVerb(comment_list): #名詞-動詞(私は飽きた)
                 if tag.ecase=="ガ":
                     return True
         return False
+    
+    def chunk_stop(chunk):
+        if chunk.dst==-1 or chunk.isTail:
+            return True
+        else:
+            return False
 
     pair_chunks = []
     for sid, sentence_list in enumerate(comment_list):
@@ -535,7 +559,7 @@ def pyknp_search_NounVerb(comment_list): #名詞-動詞(私は飽きた)
                 while len(stack)>0:
                     next_id = stack.pop()
                     next_chunk = sentence_list[next_id]
-                    if next_chunk.dst==-1 or next_chunk.isTail:
+                    if chunk_stop(chunk):
                         continue
                     if chunk_isChild(next_chunk):
                         adverbs = search_adverb(comment_list, chunk.sid, chunk.cid)
@@ -591,13 +615,19 @@ def pyknp_search_NounNoun(comment_list):
         if chunk.taigen==1:
             return True
         return False
+    
+    def chunk_stop(chunk):
+        if chunk.dst==-1 or chunk.isTail:
+            return True
+        else:
+            return False
 
     pair_chunks = []
     for sid, sentence_list in enumerate(comment_list):
         for cid, chunk in enumerate(sentence_list):
             if chunk_isRoot(chunk):
                 id = chunk.cid
-                if chunk.dst==-1 or chunk.isTail:
+                if chunk_stop(chunk):
                     continue
                 dst_chunk = sentence_list[chunk.dst]
                 if chunk_isChild(dst_chunk):
