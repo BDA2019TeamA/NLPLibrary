@@ -1,3 +1,17 @@
 SentimentAnalysis/__pycache__/*
 
+
 __pycache__/*
+.DS_Store
+.ipynb_checkpoints/*
+
+test.ipynb
+knpws.ipynb
+
+R_restraurant_目黒区.csv
+R_comment_目黒区.csv
+
+rev
+out
+
+dumptest/*
