@@ -3,8 +3,9 @@ import pydot
 import re
 from IPython.display import Image, display_png
 
+from time import sleep
 import pandas as pd
-
+import traceback
 import logging
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -111,6 +112,11 @@ def fst_parsing_predicates(fstring):
 def get_nrn(chunk):
     #chunk.nrn.split("/")[0]
     nl = "".join([basis.split("/")[0] for basis in chunk.nrn.split("+")])
+    #nl = ""
+    #for morph in chunk.morphs:
+    #    if morph.hinsi=="助詞":
+    #        nl += morph.midasi
+    #nl = chunk.midasi
     return nl
 
 ##### Morph
@@ -283,9 +289,17 @@ class Chunk:
 
 
 
-def pyknp_make_commentlist(text, kparser, lines_split=True):
+def pyknp_make_commentlist(text, kparser, lines_split=True, logfile=None):
     if lines_split:
-        text = re.split('[\n\t。 ]', text) #改行または句点で区切り配列化
+        text = re.split('[。!?！？]', text) #改行または句点で区切り配列化
+        pattern = r"^(\n+)$"
+        repatter = re.compile(pattern)
+        t2 = []
+        for t in text:
+            res = repatter.findall(t)
+            if len(res)==0:
+                t2.append(t)
+        text = t2
         while '' in text:         #空行は削除
             text.remove('')
     else:
@@ -295,7 +309,22 @@ def pyknp_make_commentlist(text, kparser, lines_split=True):
     for sentence_id, sentence in enumerate(text):
         sentence_list = [] ##
         logging.debug(sentence)
-        result = kparser.parse(sentence)
+        try:
+            result = kparser.parse(sentence)
+        except Exception as inst:
+            if logfile is None:
+                print("###################error########################")
+                print(sentence,"\n", inst)
+                traceback.print_exc(file=sys.stdout)
+                print("###########################################")
+            else:   
+                print("###################error########################", file=logfile)
+                print(sentence,"\n", inst, file=logfile)
+                traceback.print_exc(file=logfile)
+                print("###########################################", file=logfile)
+            comment_list.append([])
+            sleep(1)
+            continue
 
         for chunk_id,bnst in enumerate(result.bnst_list()):
             sentence_list.append(Chunk(sentence_id, chunk_id, bnst))
@@ -423,10 +452,10 @@ def pyknp_search_AdjectiveNoun(comment_list): #形容詞連体修飾-名詞(美�
     search_result = [[
         get_nrn(i[0][0]),                         # adj
         "/".join([get_nrn(c) for c in i[0][1]]),  # adv
-        i[0][0].deny,                             # not
+        str(i[0][0].deny),                        # not
         get_nrn(i[1]),                            # noun
         "",                                       # nokaku (now null)
-        i[1].deny                                 # not
+        str(i[1].deny)                            # not
     ]for i in pair_chunks]
 
     return search_result
@@ -498,10 +527,10 @@ def pyknp_search_NounAdjective(comment_list): #名詞-形容詞連用(ご飯は�
             search_result.append([
                 get_nrn(cl[1][0]),                                       # adj
                 "/".join([get_nrn(c) for c in cl[1][1]]),                # adv
-                cl[1][0].deny,                                           # not
+                str(cl[1][0].deny),                                      # not
                 get_nrn(cl[0][0][i]),                                    # noun
                 "/".join([get_nrn(c) for c in cl[0][1][i]]),             # nokaku
-                cl[0][0][i].deny                                         # not
+                str(cl[0][0][i].deny)                                    # not
             ])
 
     return search_result
@@ -541,10 +570,10 @@ def pyknp_search_VerbNoun(comment_list): #動詞-名詞(飽きない味)
     search_result = [[
         get_nrn(i[0][0]),                        # verb
         "/".join([get_nrn(c) for c in i[0][1]]), # adv
-        i[0][0].deny,                            # not
+        str(i[0][0].deny),                       # not
         get_nrn(i[1]),                           # noun
         "",                                      # nokaku(now null)
-        i[1].deny                                # not
+        str(i[1].deny)                           # not
     ]for i in pair_chunks]
 
     return search_result
@@ -616,10 +645,10 @@ def pyknp_search_NounVerb(comment_list): #名詞-動詞(私は飽きた)
             search_result.append([
                 get_nrn(cl[1][0]),                                       # adj
                 "/".join([get_nrn(c) for c in cl[1][1]]),                # adv
-                cl[1][0].deny,                                           # not
+                str(cl[1][0].deny),                                      # not
                 get_nrn(cl[0][0][i]),                                    # noun
                 "/".join([get_nrn(c) for c in cl[0][1][i]]),             # nokaku
-                cl[0][0][i].deny                                         # not
+                str(cl[0][0][i].deny)                                    # not
             ])
 
     return search_result
@@ -660,16 +689,39 @@ def pyknp_search_NounNoun(comment_list):
     search_result = [[
         get_nrn(i[1]),      # noun
         "",                 # nokaku (now null)
-        i[1].deny,          # not
+        str(i[1].deny),     # not
         get_nrn(i[0]),      # noun
         "",                 # nokaku (now null)
-        i[0].deny           # not
+        str(i[0].deny)      # not
     ]for i in pair_chunks]
     return search_result
 
 
-def knp_analyze(text, knp, lines_split=False, visualize=False):
+def knp_analyze(text, knp, lines_split=False, visualize=False, showchunk=True):
     comment_list = pyknp_make_commentlist(text, knp, lines_split=False)
+    if visualize:
+        pyknp_dependency_visualize(comment_list, withstr=True)
+    if showchunk:
+        print(pyknp_chunk2df(comment_list))
+        print(pyknp_tag2df(comment_list))
+
+    adj_noun = pyknp_search_AdjectiveNoun(comment_list)
+    noun_adj = pyknp_search_NounAdjective(comment_list)
+    verb_noun = pyknp_search_VerbNoun(comment_list)
+    noun_verb = pyknp_search_NounVerb(comment_list)
+    noun_noun = pyknp_search_NounNoun(comment_list)
+
+    print("adj_noun\n", adj_noun)
+    print("noun_adj\n", noun_adj)
+    print("verb_noun\n", verb_noun)
+    print("noun_verb\n", noun_verb)
+    print("noun_noun\n", noun_noun)
+
+    result = adj_noun + noun_adj + verb_noun + noun_verb + noun_noun
+    return result
+
+
+def knp_analyze_from_commentlist(comment_list, visualize=False):
     if visualize:
         pyknp_dependency_visualize(comment_list, withstr=True)
 
