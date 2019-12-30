@@ -1,0 +1,80 @@
+###################error########################
+々万歳˚₊*୧⃛୨⃛* 
+ Error: ;; Invalid input <* * * 特殊 1 記号 5 * 0 * 0 NIL
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Invalid input <* * * 特殊 1 記号 5 * 0 * 0 NIL
+###########################################
+###################error########################
+
+
+
+2019.4.17　　19:00 
+ list index out of range
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 87, in __init__
+    self.__set_args(tag_predicate.features.get("項構造"), CaseInfoFormat.PASv41)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 186, in __set_args
+    for items in self.__parse_case_analysis_items(analysis_result, case_info_format):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 178, in __parse_case_analysis_items
+    caseflag = items[1]
+IndexError: list index out of range
+###########################################
+###################error########################
+여기가　진짜　일본인들에게　입소문이　엄청난　곳인지
+친구들한테　내가　나카메구로에서　지낸다고　하면　
+10명　중　9명이　그럼　Da　Isa무조건　가라고　하더라.
+
+그럴필요도　없었던게,
+처음　나카메　왔을　때　거리좀　산책하다가　유독　허름한　어떤　피자집에　사람들이　줄서서　먹고있는데
+굉장히　신경쓰였다.
+
+왜냐면　맛집이면　일본사람들　줄　엄청서서　먹기　때문에
+그래서　한번　가봐야겠다　했는데,
+아니나　다를까　피자　무슨　그랑프리에서　우승자　식당이란다.
+
+날잡고　한번　갔는데　다행이　줄은　없었고　브레이크타임　전이라서　그런지
+제일　기본적인　마르게리타　피자를　시켜서　먹어봤는데
+그　전에,　솔직히　말하면　화덕피자　특징상　그을음은　피할수가　없다.
+하지만　난　탄건　별로　안좋아　하기　때문에　조금씩　떼어서　먹었다.
+
+그리고　한입　먹었는데
+역시　소스가　좀　달라서인지　맛은　있더라
+그래서　좀　먹다가　배불러서　이것도　포장
+
+근데　내친구들은　보통　다　들어간다고　다　먹었다　함
+아마도　난　샐러드　때문에　다　못먹은　듯.
+
+정말　럭셔리　이런쪽은　아니고　조금　허름쪽에　가까운데
+정통　이태리식　화덕피자　먹고싶다면　가보길
+
+
+재방문의사:　ㅇ
+근데　우리　이자카야산바이　주방장　유키상이　더　맛있는데　알려줘서　거길　한번　가보고나서... 
+ Error: ;; Too many mrph ( ...)!
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Too many mrph ( ...)!
+###########################################

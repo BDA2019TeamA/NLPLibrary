@@ -1,0 +1,135 @@
+###################error########################
+果実園カレンダーシリーズ12/
+
+先週日本を離れていて果物が食べたくなった時、バナナを食べながら、早く帰国したいなと思ったものです 
+ invalid literal for int() with base 10: '先週'
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 308, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 87, in __init__
+    self.__set_args(tag_predicate.features.get("項構造"), CaseInfoFormat.PASv41)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 186, in __set_args
+    for items in self.__parse_case_analysis_items(analysis_result, case_info_format):
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 145, in __parse_case_info_format
+    eid = int(items[3])
+ValueError: invalid literal for int() with base 10: '先週'
+###########################################
+###################error########################
+*\/*
+ほんとはフルーツサンドが食べたかったんだけど食後だったので 
+ Error: ;; Invalid input <*\ *\ *\ 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 308, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Invalid input <*\ *\ *\ 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+###########################################
+###################error########################
+*\/*
+
+フルーツの内容は、こないだナポリタン食べた時と一緒かも 
+ Error: ;; Invalid input <*\ *\ *\ 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 308, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Invalid input <*\ *\ *\ 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+###########################################
+###################error########################
+*\/*
+サラダも食べ応えがあります 
+ Error: ;; Invalid input <*\ *\ *\ 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 308, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Invalid input <*\ *\ *\ 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+###########################################
+###################error########################
+
+ということで行って来ました❤️
+
+　盛りだくさんサンドウィッチ+サラダ+フルーツ+紅茶で880円 
+ Error: ;; Invalid input <+ + + 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 308, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Invalid input <+ + + 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+###########################################
+###################error########################
+*\/*
+
+スーパーで、ちょっとしたカットフルーツを買うのにも400〜500円はかかるのに、こんなに旬の果物がてんこ盛りで980円てすごい 
+ Error: ;; Invalid input <*\ *\ *\ 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 308, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Invalid input <*\ *\ *\ 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+###########################################
+###################error########################
+*\/*
+
+結果、バニラアイスと頂上の生クリーム以外はすべて瀬戸ジャイアンツでした 
+ Error: ;; Invalid input <*\ *\ *\ 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 308, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Invalid input <*\ *\ *\ 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+###########################################
+###################error########################
+
+
+値段もお手頃でおススメですね*\/* 
+ Error: ;; Invalid input <*\ *\ *\ 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 308, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Invalid input <*\ *\ *\ 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+###########################################

@@ -1,0 +1,20 @@
+###################error########################
+
+ふらっと前を通ったら待ちが少なく、奇跡的に予約なしで入店できました°.*\/*.°
+
+お昼に時間が取れず軽くしか食べていなかったので超絶お腹が空いており、、
+物凄く食べたけどお会計6000円程度とコスパ良し♪
+
+ポーションが大きいので2人とかで行く場合は１つをシェアするのが良いかと 
+ Error: ;; Invalid input <*. *. *. 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 308, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Invalid input <*. *. *. 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+###########################################

@@ -1,0 +1,130 @@
+###################error########################
+と友達と約束今回は「焼肉苑コース」です♪テーブルにつくと店長さんがボトルキープしてたことも名前も覚えててくれてびっくりまだ３回目だし半月ぐらいあいてたのにーとっても嬉しかったです♪割るものは黒ウーロン茶1.5㍑￥780で乾杯ドリンクがいっぱいずつ付いてるけど私たちはボトルキープしてたからそのぶんお茶はサービスしてくれたみたいそんなこんなでコースがスタート♪・キムチ→ちょうどよい辛さ白菜の甘みがよい・チョレギサラダ→モリモリでびっくりした甘酸っぱドレッシング　　　　・上ネギタン塩→柔らかくてジューシーで厚さも好きな感じ　　　　塩だれもおいしい・ハラミ塩→ランチで食べたのと同じ感じかな　　　　単品でそんな高くないけど旨みたっぷり・カルビタレ→これもランチと同じかな普通に旨い　　　　タレもちょうどよい美味しさ・名物焼テーキ→これはそんなに好きじゃないかも…・石焼明太チーズビビンバ→名前だけでヨダレでるやーつヽノ　　　　字面だけで美味しいのわかるよねw　　　　店長さんがまぜまぜしてくれたよー　　　　さすがプロはピピンるのうまいやね　　　　チーズのおこげたーっぷり♪　　　　一口で美味しすぎた～　うまうま♪　　　　女子はみんな大好きだよねこーゆーの　　　　単品と同じくわかめスープつき　　　　でもコースにスープあるからいらないかも 
+ Error: ;; Too many mrph ( ...)!
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 320, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Too many mrph ( ...)!
+###########################################
+###################error########################
+サクラユッケ　（ｂｙ　高麗屋）	980円創業50年の大阪『高麗屋』の頑固おやじ直伝の秘伝のタレで仕上げた絶品 
+ Error: ;; Invalid input (4 items)<	 	 	 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 320, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Invalid input (4 items)<	 	 	 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+###########################################
+###################error########################
+おいしみ」　ナッチ炒め　-　足長ダコの炒め物　-　（ｂｙ　ボドゥルコル・イヤギ）	1,480円日本では珍しい足長ダコのピリ辛炒め物 
+ Error: ;; Invalid input (4 items)<	 	 	 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 320, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Invalid input (4 items)<	 	 	 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+###########################################
+###################error########################
+ソーメンと混ぜて食べるんだけど別にソーメン要らないのでこの値段ならもうちょいタコがほしい」ダッカンジョン　（ピリ辛味）	1,280円フライドチキンを特製のピリ辛ソースで炒めました 
+ Error: ;; Invalid input (4 items)<	 	 	 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 320, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Invalid input (4 items)<	 	 	 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+###########################################
+###################error########################
+「いい意味で普通においしい、予測通りの味」骨付きカルビ	1,980円韓国で焼肉と言えばコレ 
+ Error: ;; Invalid input (4 items)<	 	 	 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 320, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Invalid input (4 items)<	 	 	 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+###########################################
+###################error########################
+純豆腐チゲ＠900円カンジャンケジャン＠1,980円カニみそビビンバ＠1,780円海鮮純豆腐チゲ＠1,200円石焼ビビンバ＠900円石焼ビビンバ＆純豆腐チゲ＠1,480円A4/A5黒毛和牛焼肉＠980円燻製サムギョプサル＠980円A4/A5黒毛和牛上焼肉＠1,480円参鶏純豆腐チゲ＠950円ユッケ・石焼ビビンバ＠1,300円直火肉野菜炒め＠900円直火肉野菜炒め＆純豆腐チゲ＠1,480円水冷麺＠1,050円ビビン冷麺＠1,050円ランチにカンジャンケジャンが食べられることにもびっくりなんですが色々と魅力的なメニューに暫し葛藤 
+ invalid literal for int() with base 10: 'A5黒毛和牛焼肉＠980円燻製サムギョプサル＠980円A4'
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 320, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 87, in __init__
+    self.__set_args(tag_predicate.features.get("項構造"), CaseInfoFormat.PASv41)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 186, in __set_args
+    for items in self.__parse_case_analysis_items(analysis_result, case_info_format):
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 145, in __parse_case_info_format
+    eid = int(items[3])
+ValueError: invalid literal for int() with base 10: 'A5黒毛和牛焼肉＠980円燻製サムギョプサル＠980円A4'
+###########################################
+###################error########################
+最後はハート型に成型した炒飯で締め 
+ 'utf-8' codec can't decode bytes in position 617-618: invalid continuation byte
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 320, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 82, in parse
+    knp_lines = self.subprocess.query(juman_str, pattern=r'^%s$'%(self.pattern))
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/juman/process.py", line 70, in query
+    line = self.stdouterr.readline().rstrip().decode('utf-8')
+UnicodeDecodeError: 'utf-8' codec can't decode bytes in position 617-618: invalid continuation byte
+###########################################
+###################error########################
+実は来る前は、韓国の有名店の名前を借りただけの店だと思っていましたが、意外や意外（失礼）、レベル高し 
+ 'utf-8' codec can't decode bytes in position 705-706: invalid continuation byte
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 320, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 82, in parse
+    knp_lines = self.subprocess.query(juman_str, pattern=r'^%s$'%(self.pattern))
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/juman/process.py", line 70, in query
+    line = self.stdouterr.readline().rstrip().decode('utf-8')
+UnicodeDecodeError: 'utf-8' codec can't decode bytes in position 705-706: invalid continuation byte
+###########################################
+###################error########################
+見た目が韓国料理屋というよりも、日本の高級焼肉 
+ Error: ;; Sentence buffer (512) overflowed! ... Initialized context!
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 320, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Sentence buffer (512) overflowed! ... Initialized context!
+###########################################

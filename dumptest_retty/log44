@@ -1,0 +1,121 @@
+###################error########################
+
+ごめんなさい、私には甘すぎてちょっと頭が痛くなりましたf^_^;)
+目白の有名店、エーグルドゥースもなんですが、フランス菓子のケーキの甘さはどちらかと言うと苦手だということに今日気付きました（笑）
+
+クィニィアマン、ガトーバスク、フォンダンショコラ、ブリオッシュ、クロワッサンをテイクアウト 
+ list index out of range
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 87, in __init__
+    self.__set_args(tag_predicate.features.get("項構造"), CaseInfoFormat.PASv41)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 186, in __set_args
+    for items in self.__parse_case_analysis_items(analysis_result, case_info_format):
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 145, in __parse_case_info_format
+    eid = int(items[3])
+IndexError: list index out of range
+###########################################
+###################error########################
+
+ドレスコードなどがあるため、お誘いが無ければ、まず行きません^^;
+
+お店の雰囲気は華やかで素敵ですが、思っていたよりも堅苦しくなく、とても良かったです 
+ list index out of range
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 87, in __init__
+    self.__set_args(tag_predicate.features.get("項構造"), CaseInfoFormat.PASv41)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 186, in __set_args
+    for items in self.__parse_case_analysis_items(analysis_result, case_info_format):
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 145, in __parse_case_info_format
+    eid = int(items[3])
+IndexError: list index out of range
+###########################################
+###################error########################
+ロブション行って来ました〜っと言いたいところですが、なんと接待した筈のお客さんから、手土産頂きました〜　σ^_^;
+
+自宅に持ち帰り、早速、相方と実食 
+ list index out of range
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 87, in __init__
+    self.__set_args(tag_predicate.features.get("項構造"), CaseInfoFormat.PASv41)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 186, in __set_args
+    for items in self.__parse_case_analysis_items(analysis_result, case_info_format):
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 145, in __parse_case_info_format
+    eid = int(items[3])
+IndexError: list index out of range
+###########################################
+###################error########################
+
+
+一階と二階とロブションでもランク付けされている別のお店になっています 
+ list index out of range
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 87, in __init__
+    self.__set_args(tag_predicate.features.get("項構造"), CaseInfoFormat.PASv41)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 186, in __set_args
+    for items in self.__parse_case_analysis_items(analysis_result, case_info_format):
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 145, in __parse_case_info_format
+    eid = int(items[3])
+IndexError: list index out of range
+###########################################
+###################error########################
+級感ある店内 
+ list index out of range
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 87, in __init__
+    self.__set_args(tag_predicate.features.get("項構造"), CaseInfoFormat.PASv41)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 186, in __set_args
+    for items in self.__parse_case_analysis_items(analysis_result, case_info_format):
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/pas.py", line 145, in __parse_case_info_format
+    eid = int(items[3])
+IndexError: list index out of range
+###########################################

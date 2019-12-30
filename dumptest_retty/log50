@@ -1,0 +1,504 @@
+###################error########################
+【果実園カレンダーシリーズ53/】
+早いもので師走となりました 
+ invalid literal for int() with base 10: ''
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 84, in __init__
+    for items in self.__parse_case_analysis_items(case_analysis, CaseInfoFormat.CASE):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 137, in __parse_case_info_format
+    tid = int(items[3])
+ValueError: invalid literal for int() with base 10: ''
+###########################################
+###################error########################
+
+とはいってもフルーツ盛りだくさん*\/*フルーツの下にはアイス、求肥、寒天、みつ豆も入っていてボリューム満点でした◎
+
+フルーツ好きにはたまらないお店ですが、パスタやカレーなどフードメニューも充実しております 
+ Error: ;; Invalid input <*\ *\ *\ 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Invalid input <*\ *\ *\ 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+###########################################
+###################error########################
+と言われそうです
+ゞｴﾍ❤️
+
+パフェとズコットは
+また、次回のお楽しみにしましょう…
+ﾌﾌ♡
+
+Risaさんと沢山お話が弾み
+気がつけばいい時間に♡)))
+
+ランチまでの時間にカフェ巡りの予定なので
+美味しそうなフルーツに後ろ髪引かれつつ
+お店をあとにしました*✲ﾟ*｡　♪
+
+･:*三o✨✨つづく❤️
+
+　フルーツサンド
+　あっさり生クリーム 
+ Error: ;; Invalid input <* * * 特殊 1 記号 5 * 0 * 0 NIL
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Invalid input <* * * 特殊 1 記号 5 * 0 * 0 NIL
+###########################################
+###################error########################
+
+
+さて、ここ目黒でもお店の開店時刻730直前から雨が激しくなりましたが、今朝も月初めのフルーツサラダをいただきたく思います/
+
+その果物達は…
+
+山梨産桃、瀬戸ジャイアンツ、長野パープル、温室蜜柑、ブルーベリー、梨、西瓜、苺、クインシーマンゴー、オレンジ、これらの果物達に隠れて底には、パイナップル、メロン、そしてお決まりの、レモンでした〜
+
+大きな桃・クインシーマンゴー・皮付き梨、特に美味しかったです/ 
+ invalid literal for int() with base 10: ''
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 84, in __init__
+    for items in self.__parse_case_analysis_items(case_analysis, CaseInfoFormat.CASE):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 137, in __parse_case_info_format
+    tid = int(items[3])
+ValueError: invalid literal for int() with base 10: ''
+###########################################
+###################error########################
+五年目に突入した、月初めフルーツサラダレポートも頑張りたく思います/ 
+ invalid literal for int() with base 10: ''
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 84, in __init__
+    for items in self.__parse_case_analysis_items(case_analysis, CaseInfoFormat.CASE):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 137, in __parse_case_info_format
+    tid = int(items[3])
+ValueError: invalid literal for int() with base 10: ''
+###########################################
+###################error########################
+本日は久し振りに、モーニングDセットをいただきました/
+
+ここの看板モーニングは、フルーツサンドのCセットかもしれませんが、数年前に登場した、ライ麦トーストに入った、卵焼き・ベーコン・レタス入りのサンドも好きです、今朝のサイドフルーツは、パイナップル・西瓜・サクランボでした 
+ invalid literal for int() with base 10: ''
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 84, in __init__
+    for items in self.__parse_case_analysis_items(case_analysis, CaseInfoFormat.CASE):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 137, in __parse_case_info_format
+    tid = int(items[3])
+ValueError: invalid literal for int() with base 10: ''
+###########################################
+###################error########################
+
+
+今朝お目にかかったフルーツ達は．
+フルーツの女王・マンゴスチン、マンゴー、今年最後の、あまおう・とちおとめ苺、白苺・ホワイトパール、ブラックベリー、ブルーベリー、日向夏、林檎、西瓜、キウイ、パイナップル、デコポン、メロン、早いですね〜山梨産の桃、紅茶についてきた檸檬、です/
+
+久しぶりにいただいた、マンゴスチン、甘くて美味しかったです〜 
+ invalid literal for int() with base 10: ''
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 93, in __init__
+    self.__set_args(tag_predicate.features.get("格解析結果"), CaseInfoFormat.CASE)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 186, in __set_args
+    for items in self.__parse_case_analysis_items(analysis_result, case_info_format):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 137, in __parse_case_info_format
+    tid = int(items[3])
+ValueError: invalid literal for int() with base 10: ''
+###########################################
+###################error########################
+【通いたくなる/】おはようございます 
+ invalid literal for int() with base 10: ''
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 84, in __init__
+    for items in self.__parse_case_analysis_items(case_analysis, CaseInfoFormat.CASE):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 137, in __parse_case_info_format
+    tid = int(items[3])
+ValueError: invalid literal for int() with base 10: ''
+###########################################
+###################error########################
+二週間前に来たばかりなので趣向を変えまして/
+
+いただいたのは久しぶりとなる、Cセット・フルーツサンドと、ミニフルーツヨーグルト、飲み物はレモンスライス・二切れ付きの紅茶です〜
+
+フルーツサンドに入っている果物達は…
+マンゴー、苺、ブルーベリー、キウイ、葡萄、パイナップルで、サイドで付いてきたのは、サクランボ・紅さやか、マンゴー、水晶文旦でした 
+ invalid literal for int() with base 10: ''
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 84, in __init__
+    for items in self.__parse_case_analysis_items(case_analysis, CaseInfoFormat.CASE):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 137, in __parse_case_info_format
+    tid = int(items[3])
+ValueError: invalid literal for int() with base 10: ''
+###########################################
+###################error########################
+
+
+明日からGWが始まりますね、そして今日は、死語になりつつある(^o^、プレミアムフライデー、今日も張り切って参りましょう〜
+
+モーニング中継でございました/ 
+ invalid literal for int() with base 10: ''
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 84, in __init__
+    for items in self.__parse_case_analysis_items(case_analysis, CaseInfoFormat.CASE):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 137, in __parse_case_info_format
+    tid = int(items[3])
+ValueError: invalid literal for int() with base 10: ''
+###########################################
+###################error########################
+【旬の果物シリーズ】杉の花粉もひと段落した感じがしますが、今朝は風もなく曇っているので調子がいいです/
+
+そろそろ旬の果物も食べれるかなと思い、ここでモーニングしました、今日は、マンゴー&イチヂクが主役です〜　そして脇を飾るのは、苺、ブラックベリー、木苺、サクランボ達で、それらをパンケーキと共にいただきました 
+ invalid literal for int() with base 10: ''
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 84, in __init__
+    for items in self.__parse_case_analysis_items(case_analysis, CaseInfoFormat.CASE):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 137, in __parse_case_info_format
+    tid = int(items[3])
+ValueError: invalid literal for int() with base 10: ''
+###########################################
+###################error########################
+果実園カレンダーシリーズ45/
+月初めにいつも楽しみにしている、フルーツサラダです、誕生日スペシャルをお願いするため、今月は少しフライングして、誕生日の前日である今日、フルーツモーニングしました 
+ invalid literal for int() with base 10: '月初め'
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 87, in __init__
+    self.__set_args(tag_predicate.features.get("項構造"), CaseInfoFormat.PASv41)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 186, in __set_args
+    for items in self.__parse_case_analysis_items(analysis_result, case_info_format):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 145, in __parse_case_info_format
+    eid = int(items[3])
+ValueError: invalid literal for int() with base 10: '月初め'
+###########################################
+###################error########################
+果実園カレンダーシリーズ44/
+三月を迎えて春めいて来ましたね〜月初めのフルーツサラダも、ひときわカラフルになって参りました 
+ invalid literal for int() with base 10: '三月'
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 87, in __init__
+    self.__set_args(tag_predicate.features.get("項構造"), CaseInfoFormat.PASv41)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 186, in __set_args
+    for items in self.__parse_case_analysis_items(analysis_result, case_info_format):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 145, in __parse_case_info_format
+    eid = int(items[3])
+ValueError: invalid literal for int() with base 10: '三月'
+###########################################
+###################error########################
+果実園カレンダーシリーズ43/
+立春を迎えましたので迎春 
+ invalid literal for int() with base 10: '立春'
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 87, in __init__
+    self.__set_args(tag_predicate.features.get("項構造"), CaseInfoFormat.PASv41)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 186, in __set_args
+    for items in self.__parse_case_analysis_items(analysis_result, case_info_format):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 145, in __parse_case_info_format
+    eid = int(items[3])
+ValueError: invalid literal for int() with base 10: '立春'
+###########################################
+###################error########################
+言ってくれました/ 
+ invalid literal for int() with base 10: ''
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 84, in __init__
+    for items in self.__parse_case_analysis_items(case_analysis, CaseInfoFormat.CASE):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 137, in __parse_case_info_format
+    tid = int(items[3])
+ValueError: invalid literal for int() with base 10: ''
+###########################################
+###################error########################
+パフェとパンケーキは、季節のフルーツに合わせて今後、投稿していきたいと思います/ 
+ invalid literal for int() with base 10: ''
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 93, in __init__
+    self.__set_args(tag_predicate.features.get("格解析結果"), CaseInfoFormat.CASE)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 186, in __set_args
+    for items in self.__parse_case_analysis_items(analysis_result, case_info_format):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 137, in __parse_case_info_format
+    tid = int(items[3])
+ValueError: invalid literal for int() with base 10: ''
+###########################################
+###################error########################
+果実園カレンダーシリーズ42/
+明けましておめでとうございます、本年も宜しくお願いします 
+ invalid literal for int() with base 10: ''
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 84, in __init__
+    for items in self.__parse_case_analysis_items(case_analysis, CaseInfoFormat.CASE):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 137, in __parse_case_info_format
+    tid = int(items[3])
+ValueError: invalid literal for int() with base 10: ''
+###########################################
+###################error########################
+
+
+新年早々のフルーツ達は…
+マンゴー・キウイ・苺・ラズベリー・西瓜・冬瓜・林檎・紅林檎・シャインマスカット・温州蜜柑・オレンジ・マスクメロン・グレープフルーツ・梨・檸檬でした〜
+
+今年もフルーツの投稿多くなると思いますが、よろしくお願いします/ 
+ invalid literal for int() with base 10: ''
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 84, in __init__
+    for items in self.__parse_case_analysis_items(case_analysis, CaseInfoFormat.CASE):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 137, in __parse_case_info_format
+    tid = int(items[3])
+ValueError: invalid literal for int() with base 10: ''
+###########################################
+###################error########################
+本日が今年最後の勤務日となりますので、そのモーニングはここで年賀状書きながらとなりました/
+
+久しぶりに、モーニングDセットの、ライ麦パン玉子サンドを食べたかったのですが、今日は品切れだったので、マンゴーパンケーキをいただきました〜
+
+二種類のマンゴーが沢山パンケーキの上に載っています、苺・ブラックベリー・ラズベリー・ブルーベリー・シャインマスカットと共に 
+ invalid literal for int() with base 10: ''
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 93, in __init__
+    self.__set_args(tag_predicate.features.get("格解析結果"), CaseInfoFormat.CASE)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 186, in __set_args
+    for items in self.__parse_case_analysis_items(analysis_result, case_info_format):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 137, in __parse_case_info_format
+    tid = int(items[3])
+ValueError: invalid literal for int() with base 10: ''
+###########################################
+###################error########################
+私の投稿見て下さってる皆様、今年もお世話になりました/ 
+ invalid literal for int() with base 10: ''
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 84, in __init__
+    for items in self.__parse_case_analysis_items(case_analysis, CaseInfoFormat.CASE):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 137, in __parse_case_info_format
+    tid = int(items[3])
+ValueError: invalid literal for int() with base 10: ''
+###########################################
+###################error########################
+フルーツ盛り盛り・フレンチトースト、をいただきました/
+
+ふわふわ・熱々のフレンチトーストに行き着くまでに楽しめるフルーツ達は、キウイ、苺・巨峰・シャインマスカット・パイナップルです 
+ invalid literal for int() with base 10: ''
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 84, in __init__
+    for items in self.__parse_case_analysis_items(case_analysis, CaseInfoFormat.CASE):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 137, in __parse_case_info_format
+    tid = int(items[3])
+ValueError: invalid literal for int() with base 10: ''
+###########################################
+###################error########################
+
+
+イチヂクと西洋梨の柔らかさが、とても印象的でした/　美味しいフルーツ 
+ invalid literal for int() with base 10: ''
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 84, in __init__
+    for items in self.__parse_case_analysis_items(case_analysis, CaseInfoFormat.CASE):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 137, in __parse_case_info_format
+    tid = int(items[3])
+ValueError: invalid literal for int() with base 10: ''
+###########################################

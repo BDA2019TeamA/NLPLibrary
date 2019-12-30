@@ -1,0 +1,65 @@
+###################error########################
+の気分なので
+裏メニューから、さんかく、厚切りタン
+と、他は売り切れ〜〜
+気を取り直して、ギアラ、ハチノス、
+山芋、長ネギ‼︎ホルモン系とお野菜は、ハーフ&ハーフにするのが可能だと言うことで、ハーフ&ハーフで注文して
+山芋のキムチ
+そして、ビールがきたら
+もう一人焼き肉の戦闘開始です‼︎
+
+写メを撮るのも適当になるほど、
+肉食べまくりました〜〜♪
+
+カウンターなので、お店の人にお任せしちゃて、良い具合に焼けた物をお口に
+せっせと運ぶだけです（＾＿＾）☆
+
+プロに全てをお任せすると、全然美味しいし、なんかめちゃ贅沢気分です❤️
+
+獣のように肉を喰らい、ビールで流し込む、、
+
+至福のひと時ですね〜♪
+
+一人焼き肉最高‼︎
+
+レモンサワーに、切り替え
+
+一心不乱に食べました（≧∇≦）
+
+〆は、初スペ玉ご飯
+隣の人が頼んでいて、とってもそそられましたoo
+オレンジ色の黄身がもっこり⤴︎
+
+ビール×2
+レモンサワー×2
+
+一気に食べ尽くしました‼︎
+
+その時に食べたい物って、不足している栄養素を身体が求めて脳が司令を出しているらしいので、
+お腹も満足 
+ Error: ;; Too many mrph ( ...)!
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Too many mrph ( ...)!
+###########################################
+###################error########################
+Retty人気店の小野田商店ではありませんか*\/*イェーイ 
+ Error: ;; Invalid input <*\ *\ *\ 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Invalid input <*\ *\ *\ 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+###########################################

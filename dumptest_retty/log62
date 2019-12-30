@@ -1,0 +1,58 @@
+###################error########################
+楽しみにしていたロブションでのランチ…メニューみてもさっぱりイメージ出来ず、出てくる度に説明を聞いてもやっぱ想像の範疇を超越してて…
+まぁ食べんとわからんわからん…(^^;
+
+最初はエビのジュレにキャビアが乗っかってる中に生うにが隠れている前菜
+エビの濃厚な旨みにキャビアのプチプチ感がいいねぇ…って後に贅沢な生うにの香り、食感、旨さがやってきて、初っ端からスゲー感動
+
+次は車海老にいい感じに火を通して、海老の美味さを絶妙に引き出したものとクスクスとパプリカのムース
+ムースはどうやったらこんな風に盛り付けできんのがさっぱりわからんプロの技術に感動
+
+つづいてはスープ…ナスのスープらしいけど中に半熟玉子が隠れていて、一緒に口に入れるとまろやかな美味さに何がどうなってんのか思考が定まらない状況に…
+
+次は魚で的鯛をカダイフっていうそうめんのような、ジャガイモの千切りのような衣に包んで香ばしく焼いたもの
+これまた激うまソースと相まって最高に美味しい
+
+こらからメインディッシュ
+牛フィレにフォアグラとジロール茸を一緒にパイで包んで焼き上げたもの 
+ Error: ;; Too many mrph ( ...)!
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Too many mrph ( ...)!
+###########################################
+###################error########################
+
+follow　followme　instadaily　instafollow　instagood　instalove　like4like　instalike　l4l　love　photooftheday　tagforlikes　　diet　food　foodi　foodstagram　foodporn　
+oyakatasommelier　ダイエット　ダイエット中　ダイエット仲間　
+wine　ワイン　robuchon　恵比寿 
+ 'utf-8' codec can't decode byte 0xe3 in position 689: invalid continuation byte
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 82, in parse
+    knp_lines = self.subprocess.query(juman_str, pattern=r'^%s$'%(self.pattern))
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/juman/process.py", line 70, in query
+    line = self.stdouterr.readline().rstrip().decode('utf-8')
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe3 in position 689: invalid continuation byte
+###########################################
+###################error########################
+サービスが行き届いていて本当に素晴らしいお店でした 
+ Error: ;; Invalid input <* * * 特殊 1 記号 5 * 0 * 0 NIL
+Traceback (most recent call last):
+  File "/root/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/root/.pyenv/versions/anaconda3-2019.07/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Invalid input <* * * 特殊 1 記号 5 * 0 * 0 NIL
+###########################################

@@ -1,0 +1,122 @@
+###################error########################
+
+9/28　18:00閉店
+9/29～10/7まで休業
+9/30～10/5は、新宿伊勢丹のイタリア展に出店 
+ invalid literal for int() with base 10: '29～10'
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 308, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 87, in __init__
+    self.__set_args(tag_predicate.features.get("項構造"), CaseInfoFormat.PASv41)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 186, in __set_args
+    for items in self.__parse_case_analysis_items(analysis_result, case_info_format):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 145, in __parse_case_info_format
+    eid = int(items[3])
+ValueError: invalid literal for int() with base 10: '29～10'
+###########################################
+###################error########################
+
+
+■ノッチョーラ
+　ヘーゼルナッツの香ばしさと風味がよくて、まったりとした舌触りがめっちゃ好き/
+
+■シャンペルモ
+　グレープフルーツの酸味と苦味にシャンパンが加わって大人のジェラート/
+１口目アルコールが強いかと思ったけど、３口目くらいからグレープフルーツの風味が勝ってきて味の変化が楽しめる
+
+■ピスタチオ
+　王道 
+ invalid literal for int() with base 10: '１口目アルコール'
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 308, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 87, in __init__
+    self.__set_args(tag_predicate.features.get("項構造"), CaseInfoFormat.PASv41)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 186, in __set_args
+    for items in self.__parse_case_analysis_items(analysis_result, case_info_format):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 145, in __parse_case_info_format
+    eid = int(items[3])
+ValueError: invalid literal for int() with base 10: '１口目アルコール'
+###########################################
+###################error########################
+なんやろこの奥深き味わい 
+ 'utf-8' codec can't decode byte 0xe3 in position 95: invalid continuation byte
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 308, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 82, in parse
+    knp_lines = self.subprocess.query(juman_str, pattern=r'^%s$'%(self.pattern))
+  File "/usr/local/lib/python3.7/site-packages/pyknp/juman/process.py", line 70, in query
+    line = self.stdouterr.readline().rstrip().decode('utf-8')
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe3 in position 95: invalid continuation byte
+###########################################
+###################error########################
+めちゃめちゃ旨い/
+目つむって味わう系
+
+■オリーブオイル
+　なかなかいい 
+ list index out of range
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 308, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 41, in __init__
+    self._set_parent_child()
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 170, in _set_parent_child
+    tag.parent = self.tag_list()[tag.parent_id]
+IndexError: list index out of range
+###########################################
+###################error########################
+けど好み出るかな
+個人的には胡椒かけたらいい感じになるんやないかと…少量で 
+ invalid literal for int() with base 10: ''
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 308, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 84, in __init__
+    for items in self.__parse_case_analysis_items(case_analysis, CaseInfoFormat.CASE):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 137, in __parse_case_info_format
+    tid = int(items[3])
+ValueError: invalid literal for int() with base 10: ''
+###########################################
+###################error########################
+コスパもかなり良いですね 
+ Error: ;; Entity buffer (4096) overflowed! ... Initialized context!
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 308, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Entity buffer (4096) overflowed! ... Initialized context!
+###########################################

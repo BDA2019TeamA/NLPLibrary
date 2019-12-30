@@ -3,12 +3,17 @@ import pydot
 import re
 from IPython.display import Image, display_png
 
+import signal
+import time
 from time import sleep
 import pandas as pd
 import traceback
 import logging
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
+
+def signal_handler(signum, frame):
+    raise Exception("Timed out!")
 
 ##### get elements from "素性"
 def fst_parsing_skel(fstring, pattern, none):
@@ -309,8 +314,11 @@ def pyknp_make_commentlist(text, kparser, lines_split=True, logfile=None):
     for sentence_id, sentence in enumerate(text):
         sentence_list = [] ##
         logging.debug(sentence)
+        signal.signal( signal.SIGALRM, signal_handler )
+        signal.alarm(20)
         try:
             result = kparser.parse(sentence)
+            signal.alarm(0)
         except Exception as inst:
             if logfile is None:
                 print("###################error########################")
@@ -323,6 +331,7 @@ def pyknp_make_commentlist(text, kparser, lines_split=True, logfile=None):
                 traceback.print_exc(file=logfile)
                 print("###########################################", file=logfile)
             comment_list.append([])
+            signal.alarm(0)
             sleep(1)
             continue
 

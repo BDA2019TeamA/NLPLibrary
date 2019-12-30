@@ -1,0 +1,208 @@
+###################error########################
+と勧められるが、パンだけでお腹いっぱいになるのも勿体無いなく、一度だけおかわりしたが、二度目はパスしました(^^;;
+
+イカスミのパンとビーツとトマトのパンめちゃめちゃ美味かったなぁ 
+ list index out of range
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 87, in __init__
+    self.__set_args(tag_predicate.features.get("項構造"), CaseInfoFormat.PASv41)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 186, in __set_args
+    for items in self.__parse_case_analysis_items(analysis_result, case_info_format):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 145, in __parse_case_info_format
+    eid = int(items[3])
+IndexError: list index out of range
+###########################################
+###################error########################
+
+
+to　be　continued…♥♥
+
+お腹が一杯になって、エスプレッソをシングルでいただいていると、さらにさらに、ミニャルディーズが…まだまだ…え⁉︎
+*･゜ﾟ･*:.｡..｡.:*･''･*:.｡.　.｡.:*･゜ﾟ･*
+
+そんなこんなで、11時半にスタートしたランチが終わったのは、なんと15時‼︎
+
+「ヴェルサイユ宮殿では、ランチが終わるとディナーが始まったって…こんな感じなのかしらね」と妹 
+ Error: ;; Invalid input <* * * 特殊 1 記号 5 * 0 * 0 NIL
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Invalid input <* * * 特殊 1 記号 5 * 0 * 0 NIL
+###########################################
+###################error########################
+(^^;;
+でもそれなら外で買えるね 
+ list index out of range
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 84, in __init__
+    for items in self.__parse_case_analysis_items(case_analysis, CaseInfoFormat.CASE):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 137, in __parse_case_info_format
+    tid = int(items[3])
+IndexError: list index out of range
+###########################################
+###################error########################
+300回投稿ぉーーー*\/*
+な、なんとぉ、
+わたくし、ロブション 
+ Error: ;; Invalid input <*\ *\ *\ 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Invalid input <*\ *\ *\ 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+###########################################
+###################error########################
+
+2階のガストロノミーで
+人生最大の豪華&高額の食事をして
+参りました*\/*
+
+半端ないゴージャスな雰囲気　
+半端ないセレブ感にドキドキが
+止まんないそんな感じでお食事が
+始まり
+テーブルに置かれたナプキンを取る手が震えてる
+
+まずはシャンパンで乾杯
+うゎーなんて飲みやすいシャンパンなのー
+
+こちらを訪れる方の大半がこれ食する為に・・
+キャビア　アンペリアリ　ロブショスタイル 
+ Error: ;; Invalid input <*\ *\ *\ 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Invalid input <*\ *\ *\ 未定義語 15 その他 1 * 0 * 0 "品詞推定:名詞"
+###########################################
+###################error########################
+
+
+甘鯛　うろこ付きで香ばしく焼き、
+百合根と枯木柚子のナージュを浮かべて 
+ Error: ;; Entity buffer (4096) overflowed! ... Initialized context!
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Entity buffer (4096) overflowed! ... Initialized context!
+###########################################
+###################error########################
+
+
+記念なので、頑張ってメニューを全部、書いておきます（笑）
+
+
+○キャビアアンぺリアル　ロブションスタイル
+
+○ウニ３変化　
+　　コーヒーの香るロブション風ピュレと共に
+　　ウニのブランマンジェとフヌイユのヴルーテ
+　　自家製海藻塩でマリネしてからキュウリと大根のロールにのせて
+
+○とうもろこしのなめらかなヴルーテ　カレー風味のオイルをまとわせて
+
+○旬の甲殻類３変化
+　　スパイスとフレッシュハーブの香るブイヨンに浮かべて
+　　タラバ蟹　ミントと共にブリック揚げ、グリーンカレーのソースと
+　　ラングスティーヌ　葱のエテュベとシトロネルの香りのクレームを添えて
+○アオリイカ　ミ・キュイにポアレし、こくのあるイカスミのジュと
+　　　　　　　クルジェットのコンディモン黒こしょうとミントのエアーを添えて
+
+○フランス産フォアグラ　
+　　ブランチャで焼き、ブラックチェリーのジュビレとアーモンドと共に
+
+○フェタチーズ　赤タマネギとグリーンオリーブと共にタルト仕立てに
+　　フレッシュマジョラムを香らせて
+
+○ドーバーソール　アーモンドパウダーをまとわせて骨付きでロースト
+　　レモンの香るブリオッシュのムースリーヌとケイパーのクーリ
+
+○牛肉　様々に変化させたナスとクミン、タブナードと共に
+
+○旬の野菜達　小さなココットでエテュベに、トピナンブールのチップを散らして
+
+○アプリコ　アマレットでマリネ、ソルベと共にエキゾチックなムースにのせて
+
+○フレッシュ・パパイヤ　クーリにし、グァバのムース
+　　カシスのソルベに注いで“リオ”のイメージで
+
+○カフェとミニャルディーズ（焼き菓子や小さなケーキ等のデザートワゴン）
+
+以上、２０１４年６月のメニューでした 
+ Error: ;; Too many mrph ( ...)!
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 40, in __init__
+    self.parse(spec)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 106, in parse
+    raise Exception("Error: %s" % string)
+Exception: Error: ;; Too many mrph ( ...)!
+###########################################
+###################error########################
+
+昨年まで東京暮らしだったので、高嶺の花として遠くから見ていたお店です^^;昨日が大事な日となったので、せっかくなのでと予約しました 
+ list index out of range
+Traceback (most recent call last):
+  File "/Users/itsp/Docker/DockerfileForWSD/workspace/NLPLibrary/nlplib_pyknp2.py", line 307, in pyknp_make_commentlist
+    result = kparser.parse(sentence)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/knp.py", line 83, in parse
+    return BList(knp_lines, self.pattern, juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 43, in __init__
+    self._setPAS(juman_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/blist.py", line 79, in _setPAS
+    tag.pas = Pas(tag.tag_id, self)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 87, in __init__
+    self.__set_args(tag_predicate.features.get("項構造"), CaseInfoFormat.PASv41)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 186, in __set_args
+    for items in self.__parse_case_analysis_items(analysis_result, case_info_format):
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 181, in __parse_case_analysis_items
+    yield self.__parse_case_info_format(items, case_info_format)
+  File "/usr/local/lib/python3.7/site-packages/pyknp/knp/pas.py", line 145, in __parse_case_info_format
+    eid = int(items[3])
+IndexError: list index out of range
+###########################################
