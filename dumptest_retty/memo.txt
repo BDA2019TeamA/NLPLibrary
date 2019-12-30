@@ -1,5 +1,0 @@
-0-34
-
-40  エラー時にtraceback.print_exc(file=logfile)追加
-
-35-39,  ()で囲まれた部分を除去してから処理
