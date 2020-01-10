@@ -296,7 +296,7 @@ class Chunk:
 
 def pyknp_make_commentlist(text, kparser, lines_split=True, logfile=None):
     if lines_split:
-        text = re.split('[。!?！？]', text) #改行または句点で区切り配列化
+        text = re.split('[。!?！？　]', text) #改行または句点で区切り配列化
         pattern = r"^(\n+)$"
         repatter = re.compile(pattern)
         t2 = []
@@ -317,9 +317,11 @@ def pyknp_make_commentlist(text, kparser, lines_split=True, logfile=None):
         signal.signal( signal.SIGALRM, signal_handler )
         signal.alarm(20)
         try:
+            print("try", file=logfile) #####
             result = kparser.parse(sentence)
             signal.alarm(0)
         except Exception as inst:
+            print("error", file=logfile)
             if logfile is None:
                 print("###################error########################")
                 print(sentence,"\n", inst)
@@ -748,6 +750,45 @@ def knp_analyze_from_commentlist(comment_list, visualize=False):
 
     result = adj_noun + noun_adj + verb_noun + noun_verb + noun_noun
     return result
+
+
+def knp_analyze_from_commentlist_verb(comment_list, visualize=False):
+    if visualize:
+        pyknp_dependency_visualize(comment_list, withstr=True)
+
+    verb_noun = pyknp_search_VerbNoun(comment_list)
+    noun_verb = pyknp_search_NounVerb(comment_list)
+
+    print("verb_noun\n", verb_noun)
+    print("noun_verb\n", noun_verb)
+
+    result = verb_noun + noun_verb
+    return result
+
+def knp_analyze_from_commentlist_adj(comment_list, visualize=False):
+    if visualize:
+        pyknp_dependency_visualize(comment_list, withstr=True)
+
+    adj_noun = pyknp_search_AdjectiveNoun(comment_list)
+    noun_adj = pyknp_search_NounAdjective(comment_list)
+
+    print("adj_noun\n", adj_noun)
+    print("noun_adj\n", noun_adj)
+
+    result = adj_noun + noun_adj
+    return result
+
+def knp_analyze_from_commentlist_nounnoun(comment_list, visualize=False):
+    if visualize:
+        pyknp_dependency_visualize(comment_list, withstr=True)
+
+    noun_noun = pyknp_search_NounNoun(comment_list)
+
+    print("noun_noun\n", noun_noun)
+
+    result = noun_noun
+    return result
+
 
 
 if __name__ == '__main__':

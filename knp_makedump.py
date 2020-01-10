@@ -2,6 +2,7 @@ import pickle
 from nlplib_pyknp2 import *
 import re
 import traceback
+import sys
 
 def review_processing(review):
     review = re.sub(r"#", "", review)
@@ -73,7 +74,6 @@ def makedump_tabelog(datas, begin, num, lines_split=False, debug=False):
     knp = KNP(option = '-tab -anaphora', jumanpp=True)
     result = []
     end = min(begin+num, 274)
-    print("###", begin, num, end)
     for i, data in enumerate(datas[begin:end]):
         print(i)
         review = review_processing(data[2])
@@ -120,7 +120,7 @@ def checkdump(dump_id):
         print(len(results))
 
 
-def analyze_dump(dump_id_s, num, dirname, out_filename):
+def analyze_dump(dump_id_s, num, dirname, out_filename, separate_part=False):
     with open(out_filename,"w") as out:
         print("レビューid,動詞or形容詞or名詞,副詞,否定,対象名詞,ノ格,否定", file=out)
         for i in range(dump_id_s, dump_id_s+num):
@@ -129,12 +129,18 @@ def analyze_dump(dump_id_s, num, dirname, out_filename):
                 mean = []
                 for j, result in enumerate(knp_results):
                     try:
-                        analyze_result = knp_analyze_from_commentlist(result[-1], visualize=False)
+                        if separate_part:
+                            #analyze_result = knp_analyze_from_commentlist_adj(result[-1], visualize=False)
+                            analyze_result = knp_analyze_from_commentlist_verb(result[-1], visualize=False)
+                            #analyze_result = knp_analyze_from_commentlist_nounnoun(result[-1], visualize=False)
+                        else:
+                            analyze_result = knp_analyze_from_commentlist(result[-1], visualize=False)
                         for el in analyze_result:
                             el.insert(0, str(j+i*100))
                             mean.append(el)
                     except Exception:
                         print(i,j, "###error###")
+                        traceback.print_exc(file=sys.stdout)
                         sleep(1)
                 for m in mean:
                     print(','.join(m), file=out)
@@ -148,9 +154,9 @@ if __name__ == '__main__':
     #data = makelist_retty()
     #makedumps_retty(data, 7800, 200, lines_split=True, debug=False)
     #checkdump(36)
-    #analyze_dump(0,50)
+    analyze_dump(0,50, 'dumptest_retty', "retty_verb0-4999.csv", separate_part=True)
 
-    data = makelist_tabelog()
+    #data = makelist_tabelog()
     #makedumps_tabelog(data, 0, 100, lines_split=True, debug=False)
     #makedump_tabelog(data, 0, 25, lines_split=True, debug=False)
-    analyze_dump(0, 1, 'dumptest_tabelog', "tabelog_test0-1.csv")
+    #analyze_dump(0, 1, 'dumptest_tabelog', "tabelog_test0-1.csv")
