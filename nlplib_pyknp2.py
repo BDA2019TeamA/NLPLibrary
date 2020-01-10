@@ -116,11 +116,17 @@ def fst_parsing_predicates(fstring):
 
 def get_nrn(chunk):
     #chunk.nrn.split("/")[0]
-    nl = "".join([basis.split("/")[0] for basis in chunk.nrn.split("+")])
+    #nl = "".join([basis.split("/")[0] for basis in chunk.nrn.split("+")])
+    nl = [basis.split("/")[0] for basis in chunk.nrn.split("+")][0]
+    #pattern = r"品詞推定"
+    #repatter = re.compile(pattern)
     #nl = ""
     #for morph in chunk.morphs:
-    #    if morph.hinsi!="助詞":
-    #        nl += morph.midasi
+    #    if morph.hinsi=="助詞" or morph.hinsi=="特殊":
+    #        continue
+    #    if len(repatter.findall(morph.imis))>0:
+    #        continue
+    #    nl += morph.midasi
     #nl = chunk.midasi
     return nl
 

@@ -154,7 +154,7 @@ if __name__ == '__main__':
     #data = makelist_retty()
     #makedumps_retty(data, 7800, 200, lines_split=True, debug=False)
     #checkdump(36)
-    #analyze_dump(0,50, 'dumptest_retty', "retty0110-0-4999.csv", separate_part=False)
+    analyze_dump(0,50, 'dumptest_retty', "retty0110-0-4999.csv", separate_part=False)
 
     #data = makelist_tabelog()
     #makedumps_tabelog(data, 0, 100, lines_split=True, debug=False)
