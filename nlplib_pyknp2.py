@@ -119,7 +119,7 @@ def get_nrn(chunk):
     nl = "".join([basis.split("/")[0] for basis in chunk.nrn.split("+")])
     #nl = ""
     #for morph in chunk.morphs:
-    #    if morph.hinsi=="助詞":
+    #    if morph.hinsi!="助詞":
     #        nl += morph.midasi
     #nl = chunk.midasi
     return nl

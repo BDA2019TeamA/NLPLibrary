@@ -5,7 +5,7 @@ import traceback
 import sys
 
 def review_processing(review):
-    review = re.sub(r"#", "", review)
+    review = re.sub(r"#", "　", review)
     review = re.sub(r"\ ", "　", review)
     review = re.sub(r"https?://(.+?)[,\ 　\"\n]", "", review)
     review = re.sub(r"\((.*?)\)", "", review)
@@ -15,7 +15,7 @@ def review_processing(review):
 
 def makelist_retty():
     datas = []
-    with open("R_comment_目黒区.csv") as coms:
+    with open("./resources/R_comment_目黒区.csv") as coms:
         allstr = coms.read().split(",https://retty.me/area/")
         for num, rev in enumerate(allstr[1:]):
             rev_els = rev.split(",")
@@ -35,7 +35,7 @@ def makelist_retty():
 
 def makelist_tabelog():
     datas = []
-    with open("T_comment_目黒区.csv") as coms:
+    with open("./resources/T_comment_目黒区.csv") as coms:
         allstr = coms.read().split("\n")
         for i in range(1, len(allstr)-1, 5):
             id, CP, url = allstr[i].split(",")[:-1]
@@ -154,9 +154,14 @@ if __name__ == '__main__':
     #data = makelist_retty()
     #makedumps_retty(data, 7800, 200, lines_split=True, debug=False)
     #checkdump(36)
-    analyze_dump(0,50, 'dumptest_retty', "retty_verb0-4999.csv", separate_part=True)
+    #analyze_dump(0,50, 'dumptest_retty', "retty0110-0-4999.csv", separate_part=False)
 
     #data = makelist_tabelog()
     #makedumps_tabelog(data, 0, 100, lines_split=True, debug=False)
     #makedump_tabelog(data, 0, 25, lines_split=True, debug=False)
     #analyze_dump(0, 1, 'dumptest_tabelog', "tabelog_test0-1.csv")
+    a = makelist_retty()[4][2]
+    print(a)
+    print(type(a))
+    a = review_processing(a)
+    print(a)
