@@ -15,21 +15,19 @@ def review_processing(review):
 
 def makelist_retty():
     datas = []
-    with open("./resources/R_comment_目黒区.csv") as coms:
-        allstr = coms.read().split(",https://retty.me/area/")
-        for num, rev in enumerate(allstr[1:]):
-            rev_els = rev.split(",")
-
-            url = "https://retty.me/area/"+rev_els[0]
-            review = ",".join(rev_els[1:-3])
-            storeid = rev_els[-3]
-            reviewid = rev_els[-2]
-            score, id = rev_els[-1].split("\n")
-            if id is "":
-                id="64598"
-            id = int(id)-1
-            assert id==num
-            datas.append([id, url, review, storeid, reviewid, score])
+    with open("./resources/Rc_shaped.csv") as coms:
+        allstr = coms.read().split("\n")
+        for num, rev in enumerate(allstr):
+            if rev!="":
+                rev_list = rev.split(",")
+                id = rev_list[0]
+                url = rev_list[1]
+                review = ",".join(rev_list[2:-3])
+                storeid = rev_list[-3]
+                reviewid = rev_list[-2]
+                score = rev_list[-1]
+                assert int(id)==num
+                datas.append([id, url, review, storeid, reviewid, score])
     return datas
 
 
@@ -151,6 +149,8 @@ def analyze_dump(dump_id_s, num, dirname, out_filename, separate_part=False):
 
 
 if __name__ == '__main__':
+    print(makelist_retty())
+    """
     #data = makelist_retty()
     #makedumps_retty(data, 7800, 200, lines_split=True, debug=False)
     #checkdump(36)
@@ -165,3 +165,4 @@ if __name__ == '__main__':
     print(type(a))
     a = review_processing(a)
     print(a)
+    """
