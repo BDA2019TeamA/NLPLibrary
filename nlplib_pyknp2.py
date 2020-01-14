@@ -4,6 +4,7 @@ import re
 from IPython.display import Image, display_png
 
 import signal
+#signal.signal(signal.SIGPIPE,signal.SIG_DFL) 
 import time
 from time import sleep
 import pandas as pd
@@ -14,6 +15,8 @@ logger.setLevel(logging.DEBUG)
 
 def signal_handler(signum, frame):
     raise Exception("Timed out!")
+
+signal.signal( signal.SIGALRM, signal_handler )
 
 ##### get elements from "素性"
 def fst_parsing_skel(fstring, pattern, none):
@@ -114,7 +117,8 @@ def fst_parsing_predicates(fstring):
 
     return pred1, pred2, fstring
 
-def get_nrn(chunk):
+def get_nrn(chunk, ctype):
+    #if ctype=="verb":
     #chunk.nrn.split("/")[0]
     #nl = "".join([basis.split("/")[0] for basis in chunk.nrn.split("+")])
     nl = [basis.split("/")[0] for basis in chunk.nrn.split("+")][0]
@@ -320,13 +324,15 @@ def pyknp_make_commentlist(text, kparser, lines_split=True, logfile=None):
     for sentence_id, sentence in enumerate(text):
         sentence_list = [] ##
         logging.debug(sentence)
-        signal.signal( signal.SIGALRM, signal_handler )
+        #signal.signal( signal.SIGALRM, signal_handler )
         signal.alarm(20)
         try:
             print("try", file=logfile) #####
             result = kparser.parse(sentence)
             signal.alarm(0)
+            sleep(0.1)
         except Exception as inst:
+            signal.alarm(0)
             print("error", file=logfile)
             if logfile is None:
                 print("###################error########################")
@@ -339,7 +345,6 @@ def pyknp_make_commentlist(text, kparser, lines_split=True, logfile=None):
                 traceback.print_exc(file=logfile)
                 print("###########################################", file=logfile)
             comment_list.append([])
-            signal.alarm(0)
             sleep(1)
             continue
 
@@ -467,10 +472,10 @@ def pyknp_search_AdjectiveNoun(comment_list): #形容詞連体修飾-名詞(美�
                     pair_chunks.append([[chunk, adverbs], dst_chunk])
     
     search_result = [[
-        get_nrn(i[0][0]),                         # adj
-        "/".join([get_nrn(c) for c in i[0][1]]),  # adv
+        get_nrn(i[0][0], ctype="adj"),             # adj
+        "/".join([get_nrn(c, ctype="adv") for c in i[0][1]]),  # adv
         str(i[0][0].deny),                        # not
-        get_nrn(i[1]),                            # noun
+        get_nrn(i[1], ctype="noun"),               # noun
         "",                                       # nokaku (now null)
         str(i[1].deny)                            # not
     ]for i in pair_chunks]
@@ -542,11 +547,11 @@ def pyknp_search_NounAdjective(comment_list): #名詞-形容詞連用(ご飯は�
     for cl in pair_chunks:
         for i in range(len(cl[0][0])):
             search_result.append([
-                get_nrn(cl[1][0]),                                       # adj
-                "/".join([get_nrn(c) for c in cl[1][1]]),                # adv
+                get_nrn(cl[1][0], ctype="adj"),                           # adj
+                "/".join([get_nrn(c, ctype="adv") for c in cl[1][1]]),    # adv
                 str(cl[1][0].deny),                                      # not
-                get_nrn(cl[0][0][i]),                                    # noun
-                "/".join([get_nrn(c) for c in cl[0][1][i]]),             # nokaku
+                get_nrn(cl[0][0][i], ctype="noun"),                       # noun
+                "/".join([get_nrn(c,ctype="noun") for c in cl[0][1][i]]), # nokaku
                 str(cl[0][0][i].deny)                                    # not
             ])
 
@@ -585,10 +590,10 @@ def pyknp_search_VerbNoun(comment_list): #動詞-名詞(飽きない味)
                     pair_chunks.append([[chunk, adverbs], dst_chunk])
     
     search_result = [[
-        get_nrn(i[0][0]),                        # verb
-        "/".join([get_nrn(c) for c in i[0][1]]), # adv
+        get_nrn(i[0][0],ctype="verb"),            # verb
+        "/".join([get_nrn(c,ctype="adv") for c in i[0][1]]), # adv
         str(i[0][0].deny),                       # not
-        get_nrn(i[1]),                           # noun
+        get_nrn(i[1],ctype="noun"),               # noun
         "",                                      # nokaku(now null)
         str(i[1].deny)                           # not
     ]for i in pair_chunks]
@@ -660,11 +665,11 @@ def pyknp_search_NounVerb(comment_list): #名詞-動詞(私は飽きた)
     for cl in pair_chunks:
         for i in range(len(cl[0][0])):
             search_result.append([
-                get_nrn(cl[1][0]),                                       # adj
-                "/".join([get_nrn(c) for c in cl[1][1]]),                # adv
+                get_nrn(cl[1][0],ctype="adj"),                            # adj
+                "/".join([get_nrn(c,ctype="adv") for c in cl[1][1]]),     # adv
                 str(cl[1][0].deny),                                      # not
-                get_nrn(cl[0][0][i]),                                    # noun
-                "/".join([get_nrn(c) for c in cl[0][1][i]]),             # nokaku
+                get_nrn(cl[0][0][i],ctype="noun"),                        # noun
+                "/".join([get_nrn(c,ctype="noun") for c in cl[0][1][i]]), # nokaku
                 str(cl[0][0][i].deny)                                    # not
             ])
 
@@ -704,10 +709,10 @@ def pyknp_search_NounNoun(comment_list):
                     pair_chunks.append([chunk, dst_chunk])
 
     search_result = [[
-        get_nrn(i[1]),      # noun
+        get_nrn(i[1],ctype="noun"),      # noun
         "",                 # nokaku (now null)
         str(i[1].deny),     # not
-        get_nrn(i[0]),      # noun
+        get_nrn(i[0],ctype="noun"),      # noun
         "",                 # nokaku (now null)
         str(i[0].deny)      # not
     ]for i in pair_chunks]
