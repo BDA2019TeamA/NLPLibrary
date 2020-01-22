@@ -49,9 +49,8 @@ def makelist_tabelog(datafile):
     return datas
 
 
-def makedump_retty(datas, begin, num, dirname, lines_split=False, debug=False):
+def makedump_retty(knp, datas, begin, num, dirname, lines_split=False, debug=False):
     f = open("./"+dirname+"/log"+str(begin//100), "w")
-    knp = KNP(option = '-tab -anaphora', jumanpp=True)
     result = []
     end = min(begin+num, 64598)
     for i, data in enumerate(datas[begin:end]):
@@ -72,9 +71,8 @@ def makedump_retty(datas, begin, num, dirname, lines_split=False, debug=False):
     return result
 
 
-def makedump_tabelog(datas, begin, num, dirname, lines_split=False, debug=False):
+def makedump_tabelog(knp, datas, begin, num, dirname, lines_split=False, debug=False):
     f = open("./"+dirname+"/log"+str(begin//100), "w")
-    knp = KNP(option = '-tab -anaphora', jumanpp=True)
     result = []
     end = min(begin+num, 274)
     for i, data in enumerate(datas[begin:end]):
@@ -95,20 +93,22 @@ def makedump_tabelog(datas, begin, num, dirname, lines_split=False, debug=False)
 
 
 def makedumps_retty(datas, begin, num, dirname, lines_split=False, debug=False):
+    knp = KNP(option = '-tab -anaphora', jumanpp=True, timeout=30)
     assert(num%100==0)
     assert(begin%100==0)
     begin_id = begin // 100
 
     for i in range(num//100):
-        makedump_retty(datas, 100*(begin_id + i), 100, dirname=dirname, lines_split=lines_split, debug=debug)
+        makedump_retty(knp, datas, 100*(begin_id + i), 100, dirname=dirname, lines_split=lines_split, debug=debug)
 
 def makedumps_tabelog(datas, begin, num, dirname, lines_split=False, debug=False):
+    knp = KNP(option = '-tab -anaphora', jumanpp=True)
     assert(num%100==0)
     assert(begin%100==0)
     begin_id = begin // 100
 
     for i in range(num//100):
-        makedump_tabelog(datas, 100*(begin_id + i), 100, dirname=dirname, lines_split=lines_split, debug=debug)
+        makedump_tabelog(knp, datas, 100*(begin_id + i), 100, dirname=dirname, lines_split=lines_split, debug=debug)
 
 
 def checkdump(dirname, dump_id):
@@ -121,6 +121,15 @@ def checkdump(dirname, dump_id):
             except Exception:
                 print()
         print(len(results))
+
+
+def get_fromdump(dirname, id):
+    filenum = id//100
+    ids = id % 100
+    with open('./'+dirname+'/knpresult_'+str(filenum)+'.pickle', 'rb') as f:
+        results = pickle.load(f)
+        comment_list = results[ids][-1]
+    return comment_list
 
 
 def analyze_dump(dump_id_s, num, dirname, out_filename, separate_part=False, case=[0,0,0]):
@@ -189,11 +198,13 @@ if __name__ == '__main__':
     #print(makelist_retty())
     
     #data = makelist_retty(datafile="./resources/Rc_shaped_random.csv")
-    #makedumps_retty(data, begin=0, num=100, dirname="dumptest_retty_shuffle", lines_split=True, debug=False)
+    #makedumps_retty(data, begin=3600, num=100, dirname="dumptest_retty_shuffle", lines_split=True, debug=False)
+    data = makelist_retty(datafile="./resources/Rc_shaped.csv")
+    makedumps_retty(data, begin=5200, num=5000, dirname="dump_retty", lines_split=True, debug=False)
     #checkdump("dumptest", 0)
-    analyze_dump(0,1, 'dumptest_retty_shuffle', "test1.csv", separate_part=False)
+    #analyze_dump(36,1, 'dumptest_retty_shuffle', "testout2", separate_part=False)
     #l = [i for i in range(0, 36)]+[i for i in range(37, 44)]+[i for i in range(45, 84)]+[i for i in range(85, 100)]
-    #analyze_dump_fromlist(l, 'dumptest_retty_shuffle', "retty0112-0-4999_verb.csv", separate_part=True)
+    #analyze_dump_fromlist(l, 'dumptest_retty_shuffle', "testout2", separate_part=False)
 
     #data = makelist_tabelog("./resources/T_comment_目黒区.csv")
     #makedumps_tabelog(data, 0, 100, dirname="dumptest_tabelog", lines_split=True, debug=False)
@@ -204,4 +215,5 @@ if __name__ == '__main__':
     #print(type(a))
     #a = review_processing(a)
     #print(a)
-    
+    #comment_list = get_fromdump("dumptest_retty", 3)
+    #print(knp_analyze_from_commentlist_adj(comment_list, visualize=False))

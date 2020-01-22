@@ -2,6 +2,7 @@ from pyknp import Juman, KNP
 import pydot
 import re
 from IPython.display import Image, display_png
+from functools import wraps
 
 import signal
 #signal.signal(signal.SIGPIPE,signal.SIG_DFL) 
@@ -118,6 +119,18 @@ def fst_parsing_predicates(fstring):
     return pred1, pred2, fstring
 
 def get_nrn(chunk, ctype):
+    if ctype=="noun":
+        #print("#####"+chunk.midasi)
+        for morph in chunk.morphs:
+            a=1
+            #print(morph.midasi, morph.hinsi)
+        string = ""
+        for morph in chunk.morphs:
+            if morph.hinsi=="助詞" or morph.hinsi=="判定詞" or morph.hinsi=="特殊" or morph.hinsi=="助動詞":
+                continue
+
+            string += morph.midasi
+        print(string)
     #if ctype=="verb":
     #chunk.nrn.split("/")[0]
     #nl = "".join([basis.split("/")[0] for basis in chunk.nrn.split("+")])
@@ -325,12 +338,10 @@ def pyknp_make_commentlist(text, kparser, lines_split=True, logfile=None):
         sentence_list = [] ##
         logging.debug(sentence)
         #signal.signal( signal.SIGALRM, signal_handler )
-        signal.alarm(20)
+        signal.alarm(30)
+        print("try", file=logfile) #####
         try:
-            print("try", file=logfile) #####
             result = kparser.parse(sentence)
-            signal.alarm(0)
-            sleep(0.1)
         except Exception as inst:
             signal.alarm(0)
             print("error", file=logfile)
@@ -347,7 +358,8 @@ def pyknp_make_commentlist(text, kparser, lines_split=True, logfile=None):
             comment_list.append([])
             sleep(1)
             continue
-
+        signal.alarm(0)
+        sleep(0.1)
         for chunk_id,bnst in enumerate(result.bnst_list()):
             sentence_list.append(Chunk(sentence_id, chunk_id, bnst))
         
@@ -364,6 +376,7 @@ def pyknp_make_commentlist(text, kparser, lines_split=True, logfile=None):
                 sentence_list[chunk_id].morphs.append(Morph(sentence_id, chunk_id, morph_id, mrph))
 
         comment_list.append(sentence_list)
+    #signal.alarm(0)
     return comment_list
 
 
@@ -665,7 +678,7 @@ def pyknp_search_NounVerb(comment_list): #名詞-動詞(私は飽きた)
     for cl in pair_chunks:
         for i in range(len(cl[0][0])):
             search_result.append([
-                get_nrn(cl[1][0],ctype="adj"),                            # adj
+                get_nrn(cl[1][0],ctype="verb"),                            # verb
                 "/".join([get_nrn(c,ctype="adv") for c in cl[1][1]]),     # adv
                 str(cl[1][0].deny),                                      # not
                 get_nrn(cl[0][0][i],ctype="noun"),                        # noun
@@ -712,7 +725,7 @@ def pyknp_search_NounNoun(comment_list):
         get_nrn(i[1],ctype="noun"),      # noun
         "",                 # nokaku (now null)
         str(i[1].deny),     # not
-        get_nrn(i[0],ctype="noun"),      # noun
+        get_nrn(i[0],ctype="nouns"),      # noun
         "",                 # nokaku (now null)
         str(i[0].deny)      # not
     ]for i in pair_chunks]
@@ -743,7 +756,7 @@ def knp_analyze(text, knp, lines_split=False, visualize=False, showchunk=True):
     return result
 
 
-def knp_analyze_from_commentlist(comment_list, visualize=False):
+def knp_analyze_from_commentlist(comment_list, print_result=False, visualize=False):
     if visualize:
         pyknp_dependency_visualize(comment_list, withstr=True)
 
@@ -753,11 +766,12 @@ def knp_analyze_from_commentlist(comment_list, visualize=False):
     noun_verb = pyknp_search_NounVerb(comment_list)
     noun_noun = pyknp_search_NounNoun(comment_list)
 
-    print("adj_noun\n", adj_noun)
-    print("noun_adj\n", noun_adj)
-    print("verb_noun\n", verb_noun)
-    print("noun_verb\n", noun_verb)
-    print("noun_noun\n", noun_noun)
+    if print_result==True:
+        print("adj_noun\n", adj_noun)
+        print("noun_adj\n", noun_adj)
+        print("verb_noun\n", verb_noun)
+        print("noun_verb\n", noun_verb)
+        print("noun_noun\n", noun_noun)
 
     result = adj_noun + noun_adj + verb_noun + noun_verb + noun_noun
     return result
