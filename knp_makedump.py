@@ -60,6 +60,7 @@ def makelist_tabelog(datafile):
             if rev!="":
                 rev_list = rev.split(",")
                 rid, CP, url = rev_list[:3]
+                rid = rid[:-2]
                 review = ",".join(rev_list[3:-7])
                 service_score, storeid, reviewid, taste, evaluation, drink, env = rev_list[-7:]
                 datas.append([rid, url, review, CP, service_score, storeid, reviewid, taste, evaluation, drink, env])
@@ -72,12 +73,13 @@ def makelist_gurunabi(datafile):
         for num, rev in enumerate(allstr):
             if rev!="":
                 rev_list = rev.split(",")
-                storeid = rev_list[0]
-                url = rev_list[1]
-                reviewid = rev_list[2]
-                nickname = rev_list[3]
-                review = ",".join(rev_list[4:])
-                datas.append([storeid, url, reviewid, nickname, review])
+                rid = rev_list[0]
+                storeid = rev_list[1][1:-1]
+                url = rev_list[2][1:-1]
+                reviewid = rev_list[3][1:-1]
+                nickname = rev_list[4][1:-1]
+                review = ",".join(rev_list[5:])
+                datas.append([rid, storeid, url, reviewid, nickname, review])
     return datas
 
 
@@ -123,6 +125,26 @@ def makedump_tabelog(knp, datas, begin, num, dirname, lines_split=False, debug=F
         pickle.dump(result, f)
     return result
 
+def makedump_gurunabi(knp, datas, begin, num, dirname, lines_split=False, debug=False):
+    f = open("./"+dirname+"/log"+str(begin//100), "w")
+    result = []
+    end = min(begin+num, 1973)
+    for i, data in enumerate(datas[begin:end]):
+        print(i)
+        review = review_processing(data[-1])
+
+        comment_list = pyknp_make_commentlist(review, knp, lines_split=lines_split, logfile=f)
+        data.append(comment_list)
+        result.append(data)
+        if debug:
+            for j in knp_analyze_from_commentlist(comment_list):
+                print(j, file=f)
+    f.close()
+
+    with open('./'+dirname+'/knpresult_'+str(begin//100)+'.pickle', 'wb') as f:
+        pickle.dump(result, f)
+    return result
+
 
 def makedumps_retty(datas, begin, num, dirname, lines_split=False, debug=False):
     knp = KNP(option = '-tab -anaphora', jumanpp=True, timeout=30)
@@ -141,6 +163,15 @@ def makedumps_tabelog(datas, begin, num, dirname, lines_split=False, debug=False
 
     for i in range(num//100):
         makedump_tabelog(knp, datas, 100*(begin_id + i), 100, dirname=dirname, lines_split=lines_split, debug=debug)
+
+def makedumps_gurunabi(datas, begin, num, dirname, lines_split=False, debug=False):
+    knp = KNP(option = '-tab -anaphora', jumanpp=True)
+    assert(num%100==0)
+    assert(begin%100==0)
+    begin_id = begin // 100
+
+    for i in range(num//100):
+        makedump_gurunabi(knp, datas, 100*(begin_id + i), 100, dirname=dirname, lines_split=lines_split, debug=debug)
 
 
 def checkdump(dirname, dump_id):

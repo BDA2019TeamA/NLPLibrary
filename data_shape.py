@@ -22,16 +22,20 @@ def reshape_retty_comment():
 def reshape_guru_comment():
     with open("resources/gurunabi_comments.csv", "r") as intxt, open("resources/Gc_shaped.csv", "w") as out:
         allstr = intxt.readlines()
-        outstr = ""
-        for string in allstr:
-            string = string.strip("\n")
+        count = -1
+        outstr = str(count)+","
+        for i,string in enumerate(allstr):
             if len(string)<20:
                 outstr += string
             elif string[0]=='"' and string[8:11]=='","':
+                outstr = outstr.replace("\n", "\t")
                 print(outstr, file=out)
-                outstr = string
+                count += 1
+                outstr = str(count)+","
+                outstr += string
             else:
                 outstr += string
+        outstr = outstr.replace("\n", "\t")
         print(outstr, file=out)
 
 
@@ -42,6 +46,7 @@ def reshape_tabelog_comment():
         for string in allstr:
             string = string.strip("\n")
             if len(string)<20:
+                outstr += "\t"
                 outstr += string
             elif ",https://tabelog.com/" in string[5:35]:
                 print(outstr, file=out)
@@ -53,5 +58,5 @@ def reshape_tabelog_comment():
 
 if __name__ == '__main__':
     #reshape_retty_comment()
-    #reshape_guru_comment()
-    reshape_tabelog_comment()
+    reshape_guru_comment()
+    #reshape_tabelog_comment()
