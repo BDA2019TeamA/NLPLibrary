@@ -11,10 +11,28 @@ def review_processing(review):
     review = re.sub(r"\((.*?)\)", "", review)
     review = re.sub(r"（(.*?)）", "", review)
     review = re.sub(r"\t", "　", review)
-    if review[0]=='"':
-        review = review[1:]
-    if review[-1]=='"':
-        review = review[:-1]
+    review = re.sub(r"0", "０", review)
+    review = re.sub(r"1", "１", review)
+    review = re.sub(r"2", "２", review)
+    review = re.sub(r"3", "３", review)
+    review = re.sub(r"4", "４", review)
+    review = re.sub(r"5", "５", review)
+    review = re.sub(r"6", "６", review)
+    review = re.sub(r"7", "７", review)
+    review = re.sub(r"8", "８", review)
+    review = re.sub(r"9", "９", review)
+    review = re.sub(r"/", "／", review)
+    review = re.sub(r"~", "〜", review)
+    if len(review)>1:
+        if review[0]=='"':
+            review = review[1:]
+    elif len(review)==1 and review[0]=='"':
+        review = ""
+    if len(review)>1:
+        if review[-1]=='"':
+            review = review[:-1]
+    elif len(review)==1 and review[0]=='"':
+        review = ""
     return review
 
 
@@ -34,18 +52,32 @@ def makelist_retty(datafile):
                 datas.append([rid, url, review, storeid, reviewid, score])
     return datas
 
-
 def makelist_tabelog(datafile):
     datas = []
     with open(datafile) as coms:
         allstr = coms.read().split("\n")
-        for i in range(1, len(allstr)-1, 5):
-            rid, CP, url = allstr[i].split(",")[:-1]
-            review = allstr[i+2][10:]
-            _, service_score, storeid, reviewid, taste, evaluation, drink, env = allstr[i+4].split(",")
-            rid = int(rid)
-            assert rid==((i-1)//5)
-            datas.append([rid, url, review, CP, service_score, storeid, reviewid, taste, evaluation, drink, env])
+        for num, rev in enumerate(allstr):
+            if rev!="":
+                rev_list = rev.split(",")
+                rid, CP, url = rev_list[:3]
+                review = ",".join(rev_list[3:-7])
+                service_score, storeid, reviewid, taste, evaluation, drink, env = rev_list[-7:]
+                datas.append([rid, url, review, CP, service_score, storeid, reviewid, taste, evaluation, drink, env])
+    return datas
+
+def makelist_gurunabi(datafile):
+    datas = []
+    with open(datafile) as coms:
+        allstr = coms.read().split("\n")
+        for num, rev in enumerate(allstr):
+            if rev!="":
+                rev_list = rev.split(",")
+                storeid = rev_list[0]
+                url = rev_list[1]
+                reviewid = rev_list[2]
+                nickname = rev_list[3]
+                review = ",".join(rev_list[4:])
+                datas.append([storeid, url, reviewid, nickname, review])
     return datas
 
 
@@ -74,7 +106,7 @@ def makedump_retty(knp, datas, begin, num, dirname, lines_split=False, debug=Fal
 def makedump_tabelog(knp, datas, begin, num, dirname, lines_split=False, debug=False):
     f = open("./"+dirname+"/log"+str(begin//100), "w")
     result = []
-    end = min(begin+num, 274)
+    end = min(begin+num, 73677)
     for i, data in enumerate(datas[begin:end]):
         print(i)
         review = review_processing(data[2])
@@ -199,12 +231,13 @@ if __name__ == '__main__':
     
     #data = makelist_retty(datafile="./resources/Rc_shaped_random.csv")
     #makedumps_retty(data, begin=3600, num=100, dirname="dumptest_retty_shuffle", lines_split=True, debug=False)
-    data = makelist_retty(datafile="./resources/Rc_shaped.csv")
-    makedumps_retty(data, begin=5200, num=5000, dirname="dump_retty", lines_split=True, debug=False)
+    #data = makelist_retty(datafile="./resources/Rc_shaped.csv")
+    #makedumps_retty(data, begin=5200, num=5000, dirname="dump_retty", lines_split=True, debug=False)
     #checkdump("dumptest", 0)
     #analyze_dump(36,1, 'dumptest_retty_shuffle', "testout2", separate_part=False)
     #l = [i for i in range(0, 36)]+[i for i in range(37, 44)]+[i for i in range(45, 84)]+[i for i in range(85, 100)]
-    #analyze_dump_fromlist(l, 'dumptest_retty_shuffle', "testout2", separate_part=False)
+    l = [i for i in range(0,200)]
+    analyze_dump_fromlist(l, 'dump_retty', "retty0123-0-19999.csv", separate_part=True, case=[1,0,0])
 
     #data = makelist_tabelog("./resources/T_comment_目黒区.csv")
     #makedumps_tabelog(data, 0, 100, dirname="dumptest_tabelog", lines_split=True, debug=False)
@@ -217,3 +250,7 @@ if __name__ == '__main__':
     #print(a)
     #comment_list = get_fromdump("dumptest_retty", 3)
     #print(knp_analyze_from_commentlist_adj(comment_list, visualize=False))
+    #c = get_fromdump("dump_tabelog", 102)
+
+    #knp_analyze_from_commentlist_adj(c)
+    #knp_analyze_from_commentlist(c, print_result=True, visualize=False)

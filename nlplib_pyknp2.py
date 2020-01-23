@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from pyknp import Juman, KNP
 import pydot
 import re
@@ -337,9 +339,11 @@ def pyknp_make_commentlist(text, kparser, lines_split=True, logfile=None):
     for sentence_id, sentence in enumerate(text):
         sentence_list = [] ##
         logging.debug(sentence)
-        #signal.signal( signal.SIGALRM, signal_handler )
         signal.alarm(30)
-        print("try", file=logfile) #####
+        if logfile is None:
+            print("try")
+        else:
+            print("try", file=logfile) #####
         try:
             result = kparser.parse(sentence)
         except Exception as inst:
@@ -797,8 +801,8 @@ def knp_analyze_from_commentlist_adj(comment_list, visualize=False):
     adj_noun = pyknp_search_AdjectiveNoun(comment_list)
     noun_adj = pyknp_search_NounAdjective(comment_list)
 
-    print("adj_noun\n", adj_noun)
-    print("noun_adj\n", noun_adj)
+    #print("adj_noun\n", adj_noun)
+    #print("noun_adj\n", noun_adj)
 
     result = adj_noun + noun_adj
     return result
