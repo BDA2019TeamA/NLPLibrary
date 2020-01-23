@@ -255,6 +255,22 @@ def analyze_dump_fromlist(dump_list, dirname, out_filename, separate_part=False,
                     print(','.join(m), file=out)
 
 
+def wakachi(begin, num, dirname, out_filename):
+    assert begin%100==0 and num%100==0
+    start = begin
+    end = begin+num
+    with open(out_filename,"w") as out:
+        for i in range(start//100, end//100):
+            with open('./'+dirname+'/knpresult_'+str(i)+'.pickle', 'rb') as f:
+                knp_results = pickle.load(f)
+                for j, result in enumerate(knp_results):
+                    comment_list = result[-1]
+                    for sid, sentence_list in enumerate(comment_list):
+                        for cid, chunk in enumerate(sentence_list):
+                            for mid, morph in enumerate(chunk.morphs):
+                                print(morph.midasi, end=" ", file=out)
+                    print("", file=out)
+
 
 
 if __name__ == '__main__':
@@ -267,8 +283,8 @@ if __name__ == '__main__':
     #checkdump("dumptest", 0)
     #analyze_dump(36,1, 'dumptest_retty_shuffle', "testout2", separate_part=False)
     #l = [i for i in range(0, 36)]+[i for i in range(37, 44)]+[i for i in range(45, 84)]+[i for i in range(85, 100)]
-    l = [i for i in range(0,200)]
-    analyze_dump_fromlist(l, 'dump_retty', "retty0123-0-19999.csv", separate_part=True, case=[1,0,0])
+    #l = [i for i in range(0,200)]
+    #analyze_dump_fromlist(l, 'dump_retty', "retty0123-0-19999.csv", separate_part=True, case=[1,0,0])
 
     #data = makelist_tabelog("./resources/T_comment_目黒区.csv")
     #makedumps_tabelog(data, 0, 100, dirname="dumptest_tabelog", lines_split=True, debug=False)
@@ -285,3 +301,4 @@ if __name__ == '__main__':
 
     #knp_analyze_from_commentlist_adj(c)
     #knp_analyze_from_commentlist(c, print_result=True, visualize=False)
+    wakachi(0, 20000, "dump_retty", "testout")
